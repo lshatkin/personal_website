@@ -1,6 +1,11 @@
 body {
   height:100vh;
   font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .top-text{
@@ -9,6 +14,8 @@ body {
     flex-direction: column;
     justify-content: center;
 }
+
+
 
 .middle-text{
   margin-top: 44px;
@@ -39,7 +46,6 @@ body {
 }
 
 .top-text p {
-  font-size: 80px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -55,6 +61,14 @@ ul li a {
 
 .text-title {
   margin:0px;
+  font-size: 80px;
+}
+
+.me-logo{
+    height:120px;
+    width:120px;
+    margin: 0px 12px 0px 2px;
+    text-decoration:none;
 }
 
 .title-logo{

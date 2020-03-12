@@ -1,12 +1,12 @@
 .date {
   display:block;
   color: #303030;
-  font-size: 20px;
+  font-size: 28px;
 }
 
 .title{
   color: #1377BD;
-  font-size: 16px;
+  font-size: 24px;
   margin: 4px;
   font-weight:500;
 }
@@ -20,6 +20,7 @@
   color: #303030;
   margin:4px;
   font-weight:300;
+  font-size: 16px;
 }
 
 .container{
@@ -29,4 +30,25 @@
 .icon-title{
     display: flex;
     align-items: center;
+}
+
+.logo{
+  width:30px;
+  height:30px;
+  margin-right: 10px;
+}
+
+.text-title {
+  margin:0px;
+  font-size: 50px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.text-description{
+  margin:0px;
+  font-size: 20px;
+  text-align: center;
+  font-style: italic;
 }

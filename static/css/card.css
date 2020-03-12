@@ -25,8 +25,8 @@
 
 .card {
   margin:10px;
-  max-height: 325px;
-  min-height: 325px;
+  max-height: 350px;
+  min-height: 350px;
   max-width: 320px;
 }
 
@@ -53,14 +53,23 @@
     width: auto;
 }
 
+.card .card-image:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .status {
   color: #7699C2;
 }
 
 .card-title {
-overflow: hidden;
-    white-space: nowrap;
+    overflow: auto;
+    white-space: wrap;
     text-overflow: ellipsis;
+}
+
+.btn{
+  position : absolute;
+  bottom : 0;
 }
 
 .container-outer {

@@ -38,32 +38,6 @@ def projects():
 
     return render_template('projects.html', projects=data, tag=tag)
 
-
-@app.route('/lifehacks/privacy-policy')
-def lifehacks_privacy_policy():
-    return render_template('lifehacks-privacy-policy.html')
-
-
-@app.route('/dawebmail/privacy-policy')
-def dawebmail_privacy_policy():
-    return render_template('dawebmail-privacy-policy.html')
-
-
-@app.route('/lifehacks/terms-and-conditions')
-def lifehacks_disclaimer():
-    return render_template('lifehacks-terms-and-conditions.html')
-
-
-@app.route('/lifehacks/disclaimer')
-def lifehacks_terms_and_conditions():
-    return render_template('lifehacks-disclaimer.html')
-
-
-@app.route('/mit-media-lab-application')
-def media_lab_application():
-    return render_template('mit-media-lab-application.html')
-
-
 @app.route('/blog')
 def blog():
     return redirect("http://bhardwajrish.blogspot.com/", code=302)
@@ -71,9 +45,9 @@ def blog():
 
 @app.route('/experiences')
 def experiences():
-    experiences = get_static_json("static/experiences/experiences.json")['experiences']
-    experiences.sort(key=order_projects_by_weight, reverse=True)
-    return render_template('projects.html', projects=experiences, tag=None)
+    books = get_static_json("static/experiences/experiences.json")['experiences']
+    books.sort(key=order_projects_by_weight, reverse=True)
+    return render_template('books.html', books=books, tag=None)
 
 
 def order_projects_by_weight(projects):

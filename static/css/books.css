@@ -1,0 +1,39 @@
+.cards-container {
+  max-width: 950px;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .card {
+    display: inline-block;
+  }
+}
+
+.text-title-books {
+  margin:0px;
+  font-size: 60px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-style: bold;
+}
+
+.text-description{
+  margin:0px;
+  font-size: 25px;
+  text-align: center;
+  font-style: italic;
+}
+
+
+.book{
+  height: 300px;
+  width:  200px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  border: 10px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}

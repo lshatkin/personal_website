@@ -4,24 +4,36 @@ body {
 }
 
 .navbar-ref {
-  color: #808080;
+  color: black;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
 
 .navbar-ul {
-    background-color: white;
+    background-color: #87CEFA;
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 5px solid black;
 }
 
 .list-inline {
   display: flex;
   text-decoration: none;
   justify-content: space-around;
-  margin:20px 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
   width: 50%;
+}
+
+
+
+.me-logo{
+    height:30px;
+    width:30px;
+    margin: 0px 12px 0px 2px;
+    text-decoration:none;
 }
 
 @media only screen and (max-width: 1094px) {
