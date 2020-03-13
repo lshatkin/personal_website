@@ -1,0 +1,76 @@
+{
+  "projects": [
+    {
+      "name": "Pitch Outcome Prediction",
+      "link": "pitches",
+      "date": "June 2016",
+      "weight": 9,
+      "tags": [
+        "R",
+        "Shiny",
+        "ML",
+        "Data Viz"
+      ],
+      "photos": [
+        "/static/projects/pitches/img-1.png"
+      ]
+    },
+    {
+      "name": "Cryptocurrency Research Dashboard",
+      "link": "crypto",
+      "date": "March 2018",
+      "weight": 7,
+      "tags": [
+        "Python",
+        "Shiny",
+        "API",
+        "Web Scrape"
+      ],
+      "photos": [
+        "/static/projects/crypto/img-1.png"
+      ]
+    },
+    {
+      "name": "Fantasy Football League Home",
+      "link": "fantasy_dashboard",
+      "date": "November 2019",
+      "weight": 8,
+      "tags": [
+        "Flask",
+        "AWS",
+        "SQLite"
+      ],
+      "photos": [
+        "/static/projects/fantasy_dashboard/img-1.png"
+      ]
+    },
+    {
+      "name": "Caption Generation with Valence Shifts",
+      "link": "caption",
+      "date": "November 2018",
+      "weight": 10,
+      "tags": [
+        "NLP",
+        "ML",
+        "Python"
+      ],
+      "photos": [
+        "/static/projects/caption/img-1.png"
+      ]
+    },
+    {
+      "name": "Fake News Detection",
+      "link": "fake",
+      "date": "March 2019",
+      "weight": 11,
+      "tags": [
+        "ML",
+        "Python",
+        "Report"
+      ],
+      "photos": [
+        "/static/projects/fake/img-2.png"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/timeline.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m4 l8">
+            <div class="col s12 m4 l8">
+                <span class="date">2020</span>
+                <ul>
+                    <div class="icon-title">
+                        <img src="/static/images/jpmc.png" class = "logo"/>
+                        <p class = "title">Software Engineer at J.P. Morgan Chase & Co.</p>
+                    </div>
+                    <span class="content">After five and a half years of school, I finally made it to the working world. I officially started my career on February 3rd, 2020 at J.P. Morgan Chase & Co., working in the Chicago office.</span>
+                </ul>
+                <span class="date">2019</span>
+                <ul>
+                    <div class="icon-title">
+                        <img src="/static/images/umich.png" class = "logo"/>
+                        <p class = "title">Graduated!</p>
+                    </div>
+                    <span class="content"> In December, 2019, I graduated summa cum laude from the University of Michigan with a Computer Science and Eng MS. The program was extremely useful, as I greatly advanced my knowledge in Machine Learning, Data Science, and Software Engineering as a whole. </span>
+                    <div class="icon-title">
+                        <img src="/static/images/jpmc.png" class = "logo"/>
+                        <p class = "title">Machine Learning Intern at J.P. Morgan Chase & Co.</p>
+                    </div>
+                    <span class="content">For the entire year of 2019, including two semesters and a summer, I worked as a machine learning intern at J.P. Morgan Chase & Co. During this time, my team and I worked on a information extraction engine to make the information pipeline more efficient within the Consumer Bank (CB). By mid-summer, I was chosen to be the leader of the group. Our product is currently in the process of being put into production.</span>
+                </ul>
+                <span class="date">2017-2018</span>
+                <ul>
+                    <div class="icon-title">
+                        <img src="/static/images/umich.png" class = "logo"/>
+                        <p class = "title">Started my Master's in Computer Science at UM</p>
+                    </div>
+                    <span class="content">After just getting to the tip of the iceberg for Data Science and Machine Learning techniques, I came back to get my Master's in CSE, focusing on Machine Learning. I was passionate about the subject, and wanted to steer my career path towards the field. I focused my program in ML / AI by taking advanced classes in AI, NLP, amd Reinforcement Learning. Check out my projects, <a href="projects/fake"> Fake News Detection </a> and <a href = "projects/caption"> Caption Generation with Valence Shifts </a>, which I completed during my courses throughout the program.</span>
+                    <div class="icon-title">
+                        <img src="/static/images/euro.png" class = "logo"/>
+                        <p class = "title">Traveled for the Summer</p>
+                    </div>
+                    <span class="content"> After graduating, and before starting my Master's program, I decided to take a summer to travel. I started the summer with a month long trip around Europe, then spent a month in New York exploring the city, a few weeks in Nova Scotia, and finally one final road trip up the East Coast, from DC to Boston.</span>
+
+                    <div class="icon-title">
+                        <img src="/static/images/umich.png" class = "logo"/>
+                        <p class = "title">Graduated!</p>
+                    </div>
+                    <span class="content"> The three years went fast, and before I knew it I graduated magna cum laude from the University of Michigan with a BS in Data Science and a Philosophy Minor. But, I was just getting interested in Machine Learning and thus decided to stick around for my Master's, which I would start the next fall.</span>
+
+                    <div class="icon-title">
+                        <img src="/static/images/iota.png" class = "logo"/>
+                        <p class = "title">Bought into the Cryptocurrency Hype</p>
+                    </div>
+                    <span class="content">Second semester of my senior year, with a low course load and lots of time to hack around, I grew very interested in the cryptocurrency markets and decided to make a research dashboard. The dashboard aimed to centralize that initial phase of research when looking into new Altcoins. <a href= "projects/crypto">Check out my project here. </a></span>
+                    <div class="icon-title">
+                        <img src="/static/images/umich.png" class = "logo"/>
+                        <p class = "title">Research Assistant for Department of Complex Systems</p>
+                    </div>
+                    <span class="content">My senior year, I worked with Professor Grim of the Complex Systems department at U of M as a research assistant. We worked to create a model to describe networks of ideas within human’s minds, with a focus on finding potential causes for paradigm shifts within these networks. I worked in a team of four undergraduate students and Professor Grim. Our work is in the process of being published, and will hopefully be ready soon!</span>
+                </ul>
+                <span class="date">2016-2017</span>
+                <ul>
+                    <div class="icon-title">
+                        <img src="/static/images/omc.png" class = "logo"/>
+                        <p class = "title">Trading Intern at Old Mission Capital</p>
+                    </div>
+                    <span class="content">After my junior year, I interned at Old Mission Capital, a proprietary trading firm in Chicago. Using Python, Excel and R, I studied data sets provided by the OMC research infrastructure to backtest trading strategies. This internship was my first introdution to real world problems, and especially taking a project from idea to product. </span>
+
+                    <div class="icon-title">
+                        <img src="/static/images/umich.png" class = "logo"/>
+                        <p class = "title">Study, Study Study</p>
+                    </div>
+                    <span class="content">My Juior year, I enrolled in my core classes for my Data Science major and Philosophy minor. First semester, this included Linear Algebra, Data Structures and Algorithms, Advanced Probability, and Knowledge and Reality (Philosophy). Second semester did not let up, enrolling in Machine Learning, Financial Mathematics, Applied Regression, and Political Philsophy. I focused on my courses this year, and did not do much in terms of extra curriculars.</span>
+                </ul>
+                <span class="date">2016</span>
+                <ul>
+                    <div class="icon-title">
+                        <img src="/static/images/cubs.png" class = "logo"/>
+                        <p class = "title">Worked as a Vendor at Wrigley Field</p>
+                    </div>
+                    <span class="content">After my study abroad program, you could have caught me selling peanuts and soda at Wrigley Field! This job was not necessarily a career advancer, but will most likely go down as one of my favorite jobs I will ever have.</span>
+
+                    <div class="icon-title">
+                        <img src="/static/images/ix.png" class = "logo"/>
+                        <p class = "title">Studied Abroad in Cape Town, South Africa</p>
+                    </div>
+                    <span class="content">Over the summer after my first year at UM, I enrolled in a Data Science study abroad program through iXperience. This program was a month long bootcamp in DS, followed by a month long internship where we could practice our new skills in industry. In this program, I learned R Programming Language, and was first introduced to machine learning. <a href="projects/pitches"> Also, check out my Hackathon project from this program!</a></span>
+                    
+                </ul>
+                <span class="date">2015</span>
+                <ul>
+                    <div class="icon-title">
+                        <img src="/static/images/umich.png" class = "logo"/>
+                        <p class = "title">Worked as a Data Analyst for UM Hockey Team</p>
+                    </div>
+                    <span class="content">Going into my first year at UM, I wanted to hit the ground running for extracurricular academic activities. I connected with the head of player development for the hockey team, and got a role as a data analyst. This was my first exposure to Python coding and data analytics.</span>
+                    <div class="icon-title">
+                        <img src="/static/images/umich.png" class = "logo"/>
+                        <p class = "title">Started Undergrad at University of Michigan</p>
+                    </div>
+                    <span class="content">After a year at the Univeristy of North Carolina - Chapel Hill, I decided to move a little closer to home, to Ann Arbor. I entered U of M not fully knowing what I wanted to study, choosing between computer science, statistics, and mathematics. Luckly, just as I arrived, a new program called Data Science had just begun, granting me exposure to all three areas of discipline. So, I declared my Data Science major, and along with a Philsophy major I picked up along the way, the rest was history.</span>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+
+    <!--<li><a href="/projects/" class="title">[]</a>
+        <span class="content"></span></li>-->
+    {% endblock %}

@@ -1,0 +1,131 @@
+{
+  "experiences": [
+    {
+      "link": "https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567",
+      "weight": 3,
+      "tags": [
+        "Computer Science",
+        "Theory"
+      ],
+      "photos": [
+        "/static/experiences/images/godel.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/Superintelligence-Dangers-Strategies-Nick-Bostrom/dp/1501227742",
+      "weight": 6,
+      "tags": [
+        "A.I.",
+        "Philosophy"
+      ],
+      "photos": [
+        "/static/experiences/images/superintelligence.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/Age-Surveillance-Capitalism-Future-Frontier/dp/1610395697",
+      "weight": 9,
+      "tags": [
+        "Big Tech",
+        "Sociology"
+      ],
+      "photos": [
+        "/static/experiences/images/surveillance.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/Player-Piano-Novel-Kurt-Vonnegut/dp/0385333781",
+      "weight": 10,
+      "tags": [
+        "A.I.",
+        "Business"
+      ],
+      "photos": [
+        "/static/experiences/images/player_piano.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555",
+      "weight": 8,
+      "tags": [
+        "A.I.",
+        "Business"
+      ],
+      "photos": [
+        "/static/experiences/images/thinking.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/American-Summer-Love-Death-Chicago/dp/0385538804",
+      "weight": 5,
+      "tags": [
+        "Sociology",
+        "Business"
+      ],
+      "photos": [
+        "/static/experiences/images/summer.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/Confederacy-Dunces-John-Kennedy-Toole/dp/0802130208",
+      "weight": 7,
+      "tags": [
+        "Fiction"
+      ],
+      "photos": [
+        "/static/experiences/images/dunces.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/Wild-Sheep-Chase-Novel/dp/037571894X",
+      "weight": 2,
+      "tags": [
+        "Fiction"
+      ],
+      "photos": [
+        "/static/experiences/images/sheep.jpg"
+      ]
+    },
+    {
+      "link": "https://www.amazon.com/Dreaming-Beatles-Story-Whole-World/dp/0062207652",
+      "weight": 4,
+      "tags": [
+        "Music"
+      ],
+      "photos": [
+        "/static/experiences/images/beatles.jpg"
+      ]
+    },
+        {
+      "link": "https://www.amazon.com/Black-Swan-Improbable-Robustness-Fragility/dp/081297381X",
+      "weight": 2,
+      "tags": [
+        "Music"
+      ],
+      "photos": [
+        "/static/experiences/images/swan.jpg"
+      ]
+    },
+        {
+      "link": "https://www.amazon.com/Quichotte-Salman-Rushdie/dp/059313298X",
+      "weight": 5,
+      "tags": [
+        "Music"
+      ],
+      "photos": [
+        "/static/experiences/images/quichotte.jpg"
+      ]
+    },
+        {
+      "link": "https://www.amazon.com/Killer-Angels-Classic-Novel-Trilogy/dp/0345348109",
+      "weight": 2,
+      "tags": [
+        "Music"
+      ],
+      "photos": [
+        "/static/experiences/images/killer.jpg"
+      ]
+    }
+
+  ]
+}

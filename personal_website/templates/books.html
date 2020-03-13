@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/books.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/card.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/chip.css') }}">
+<link type="text/css" rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+
+{% endblock %}
+
+{% block body %}
+
+<div>
+    <p class="text-title-books">My Reading List</p>
+    <br/>
+    <p class="text-description"> Take a look at some of my favorite books in order to gain a better understanding of what I like and what I know!</p>
+    <br/><br/><br/>
+</div>
+
+<div class="row cards-container">
+    {% for book in books %}
+    <div class="col s3">
+        <a href="{{book['link']}}">
+            <img class = book src={{book['photos'][0]}}/>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
