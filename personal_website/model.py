@@ -47,7 +47,7 @@ def articles():
     if tag is not None:
         data = [project for project in data if tag.lower() in [project_tag.lower() for project_tag in project['tags']]]
 
-    return render_template('projects.html', projects=data, tag=tag)
+    return render_template('articles.html', projects=data, tag=tag)
 
 @personal_website.app.route('/blog')
 def blog():

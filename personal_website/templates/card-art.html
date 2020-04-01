@@ -1,0 +1,32 @@
+<div class="col s12 m4 l4">
+    <a href="/articles/{{article['link']}}">
+        <div class="card hoverable">
+            <div class="card-image waves-effect waves-block waves-light">
+                {% if 'photos' in article %}
+                <img class="card-image activator" src={{article['photos'][0]}}/>
+                {% else %}
+                <img class="card-image activator" src="/static/images/projectx.png/">
+                {% endif %}
+            </div>
+            <div class="card-content activator">
+                <div class="container-outer">
+                    <div class="md-chips container-inner">
+                        {% for tag in article['tags'] %}
+                        <div class="md-chip md-chip-clickable"><a class="md-chip-link"
+                                                                  href="/article?tags={{tag}}">{{tag}}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                <span id="title" class="card-title activator grey-text text-darken-4" title="{{article['name']}}">
+                  {{article['name']}}
+                </span>
+                </div>
+                <div>
+                    <span><a href="/articles/{{article['link']}}">Read More</a></span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
