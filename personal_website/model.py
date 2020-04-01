@@ -109,7 +109,7 @@ def article(title):
         path = "articles"
         selected['description'] = io.open(get_static_file(
             'static/%s/%s/%s.html' % (path, selected['link'], selected['link'])), "r", encoding="utf-8").read()
-    return render_template('404.html'), 404
+    return render_template('project.html', project=selected)
 
 
 @personal_website.app.errorhandler(404)
