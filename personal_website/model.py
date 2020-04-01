@@ -37,6 +37,18 @@ def projects():
 
     return render_template('projects.html', projects=data, tag=tag)
 
+
+@personal_website.app.route('/articles')
+def articles():
+    data = get_static_json("static/articles/articles.json")['articles']
+    data.sort(key=order_projects_by_weight, reverse=True)
+
+    tag = request.args.get('tags')
+    if tag is not None:
+        data = [project for project in data if tag.lower() in [project_tag.lower() for project_tag in project['tags']]]
+
+    return render_template('projects.html', projects=data, tag=tag)
+
 @personal_website.app.route('/blog')
 def blog():
     return redirect("http://bhardwajrish.blogspot.com/", code=302)
