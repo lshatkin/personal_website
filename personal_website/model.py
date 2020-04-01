@@ -105,10 +105,10 @@ def article(title):
         selected = in_art
 
     # # load html if the json file doesn't contain a description
-    # if 'description' not in selected:
-    #     path = "articles"
-    #     selected['description'] = io.open(get_static_file(
-    #         'static/%s/%s/%s.html' % (path, selected['link'], selected['link'])), "r", encoding="utf-8").read()
+    if 'description' not in selected:
+        path = "articles"
+        selected['description'] = io.open(get_static_file(
+            'static/%s/%s/%s.html' % (path, selected['link'], selected['link'])), "r", encoding="utf-8").read()
     return render_template('404.html'), 404
 
 
