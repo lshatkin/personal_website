@@ -21,8 +21,8 @@
 <div class="row">
     <div class="md-chips md-chips-center col s2 offset-s5">
         <div class="md-chip md-chip-hover">
-            <a class="md-chip-link" href="/projects">{{tag}}</a>
-            <div class="md-chip-remove"><a href="/projects" class="md-chip-remove-span">x</a></div>
+            <a class="md-chip-link" href="/articles">{{tag}}</a>
+            <div class="md-chip-remove"><a href="/articles" class="md-chip-remove-span">x</a></div>
         </div>
     </div>
 </div>
@@ -30,7 +30,7 @@
 
 <div class="row cards-container">
     {% for project in projects %}
-    {% include "card-art.html" %}
+    {% include "card.html" %}
     {% endfor %}
 </div>
 
