@@ -94,7 +94,7 @@ def project(title):
     return render_template('project.html', project=selected)
 
 @personal_website.app.route('/articles/<title>')
-def project(title):
+def article(title):
     projects = get_static_json("static/articles/articles.json")['articles']
     experiences = get_static_json("static/experiences/experiences.json")['experiences']
 
