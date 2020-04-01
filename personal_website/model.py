@@ -113,10 +113,10 @@ def article(title):
 
     # load html if the json file doesn't contain a description
     if 'description' not in selected:
-        path = "experiences" if in_exp is not None else "projects"
+        path = "articles"
         selected['description'] = io.open(get_static_file(
             'static/%s/%s/%s.html' % (path, selected['link'], selected['link'])), "r", encoding="utf-8").read()
-    return render_template('project.html', project=selected)
+    return render_template('article.html', project=selected)
 
 
 @personal_website.app.errorhandler(404)
