@@ -3,13 +3,11 @@
     {
       "name": "Exploring Spotify Data with Plotly",
       "link": "spotify",
-      "date": "March 2018",
+      "date": "March 2020",
       "weight": 7,
       "tags": [
-        "Python",
-        "Shiny",
-        "API",
-        "Web Scrape"
+        "Plotly",
+        "Data Viz"
       ],
       "photos": [
         "/static/articles/spotify/img-1.png"
