@@ -8,6 +8,19 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.content {
+  margin-right: 15%;
+  margin-left: 15%;
+  font-size: 20px;
+}
+
+.content-header {
+  font-family: 'Roboto', sans-serif;
+  margin-right: 15%;
+  margin-left: 15%;
+  font-size: 30px;
+}
+
 .wrapper{
   width: 100%;
 }
@@ -26,7 +39,7 @@
 
 .fixed-wrapper {
     position: fixed;
-    right: 50%;
+    right: 25%;
     top: calc(50% - 275px);
     display:flex;
     justify-content:center;

@@ -1,7 +1,7 @@
 {
   "articles": [
     {
-      "name": "Exploring Spotify Data with Plotly",
+      "name": "How I Listen: Exploring my Spotify Listening Habits using Plotly",
       "link": "spotify",
       "date": "March 2020",
       "weight": 7,
