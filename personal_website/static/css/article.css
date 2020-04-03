@@ -14,11 +14,16 @@
   font-size: 20px;
 }
 
+.caption {
+  text-align: center;
+  font-size: 14px;
+}
+
 .content-header {
   font-family: 'Roboto', sans-serif;
   margin-right: 15%;
   margin-left: 15%;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .wrapper{

@@ -1,9 +1,26 @@
-<!-- <h2 class="content-header"> Overview </h2>
+<p class="content-header"> Overview </p>
+<hr>
+<p class="content"> 
 
-<p class="content"> first I want to talk about the data that I used 
-        first I want to talk about the data that I used 
-        first I want to talk about the data that I used 
-    first I want to talk about the data that I used </p>
+Upon first looking at the data I had recently received from Spotify, I was unsure of my next step. I was provided with a list of every song I had listened to in the past year (March 2018 - March 2019, to be more precise), and the date and time I listened to that song. Initially, I found this dataset to be unfortunately shallow, and thought my project would soon require a load of API calls and further data enrichment. But, as I began to play around with the data using Plotly, I quickly discovered the depth of this dataset. 
+<br><br>
+This project started as a desire to learn more about my listening than was provided by the "Wrapped 2019" little listening summary provided by Spotify. For those who do not know of this feature, Spotify provides a small summary of a users' listening history every year, which provides the top genres and songs that the user listened to over the year. While this is always fun to look at and share, I wanted to dive deeper and know more about what I was listening too. Quickly, though, I found that <i>WHAT</i> I listened to was not nearly as interesting as <i>HOW</i>I listened to music.
+<br><br>
+So, I changed paths, and started looking and my listening behavior, rather than just my listening history by itself. I think what I found provides a fun, telling insight as to how I listen to music. I really enjoyed this project, and was able to learn the intricacies of Plotly along the way. I hope you enjoy this article, and please reach out if you have questions, comments, or want me to take a look at your Spotify data!
+<br><br>
+<i>DISCLAIMER:</i> Sometimes the graphs / animations have trouble loading, and will lead you to the Plotly website if you click on them. You can either wait for them to load (shouldn't be too long) or just click through to the Plotly website!
+
+</p>
+<br>
+<hr>
+<p class="content-header"> Initial Exploration </p>
+<hr>
+<br>
+<p class = "content">
+
+While this article will focus on my listening behavior, I think it is important to start with a basic chart showing what I listened to over the past year. I will try not to overload you, so first, here is a chart simply showing my top 10 most listened to artists in the time frame of March 2018 - March 2019:
+
+</p>
 
 <div>
     <a href="https://plotly.com/~lloydshatkin/10/?share_key=aiQQZajy7xs2Nc7Il09FoV" target="_blank" title="all_time_listens" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/10.png?share_key=aiQQZajy7xs2Nc7Il09FoV" alt="all_time_listens" style="max-width: 100%;width: 650px;"  width="650" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
@@ -11,72 +28,158 @@
 </div>
 
 
+<p class = "content">
+
+<br>
+But this ends up being pretty boring, because, for the most part, I know what I listened to. So, the next step in my exploration was to add that time-series aspect. In other words, how did I listen to this music over time. Plotly provides the ability to make pretty cool animations in barely any lines of code, so my next step started with a simple bar graph showing my cumulative listens over time:
+</p>
+
 <div>
     <a href="https://plotly.com/~lloydshatkin/14/?share_key=6vwZvogIaOkvNwaIw4AIBs" target="_blank" title="listens_over_time_animate" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/14.png?share_key=6vwZvogIaOkvNwaIw4AIBs" alt="listens_over_time_animate" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:14" sharekey-plotly="6vwZvogIaOkvNwaIw4AIBs" src="https://plotly.com/embed.js" async></script>
 </div>
+
+<p class = "content">
+
+<br>
+One thing I noticed afer watching this animation a couple times was that the bars seemed to rise rapidly and violently. For example, if you move the date slider back to Week 45, you can see that The Beatles are not even in my Top 5 most listened to artists, and trailing the #2 artist (Twin Peaks) by almost 200 listens. Yet, in the last couple weeks, that Beatles bar flies up and claims its spot as my #2 listened to artist of the year. 
+<br>
+<br>
+In other words, I started to get a hunch that I am a binge listener, replaying the same artist over and over for a brief period of time, until I move on to the next. Before I did a full deep dive on this hunch, I wanted to see one more animation. The next animation plots that same growth in total listens over time, but adds another component called <b><i> Proportion of Total Weekly Listens </i></b>. This is an important concept, so let me provide a figure and an explanation. 
+<br>
+</p>
+<div>
+    <a href="https://plotly.com/~lloydshatkin/18/?share_key=OB76rhqkeGmtzNBTt8Hv3e" target="_blank" title="one_pie" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/18.png?share_key=OB76rhqkeGmtzNBTt8Hv3e" alt="one_pie" style="max-width: 100%;width: 800px;"  width="800" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
+    <script data-plotly="lloydshatkin:18" sharekey-plotly="OB76rhqkeGmtzNBTt8Hv3e" src="https://plotly.com/embed.js" async></script>
+</div>
+
+<br>
+<p class = "content">
+Figure 3 shows a breakdown of one week of listening, divided up by songs played by an artist. So, for the week shown in this figure, around 35% of the total songs (hover over an area to see for yourself!) I listened to were by Unknown Mortal Orchestra, around 16% were by Bob Dylan, and so on. These values of 35% and 16% represent the <b><i> Proportion of Total Weekly Listens </i></b> for UMO and Bob Dylan, respectively. 
+<br><br>
+So, with this in mind, I wanted to see how these proportions varied over time and related to the total cumulative listens for my top artists. The following animation provides a good idea of what I was going after:
+<br>
+</p>
+
+
 
 <div>
     <a href="https://plotly.com/~lloydshatkin/16/?share_key=a6vEqOydVqCpcCq9o54sz7" target="_blank" title="prop_sum_animate" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/16.png?share_key=a6vEqOydVqCpcCq9o54sz7" alt="prop_sum_animate" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:16" sharekey-plotly="a6vEqOydVqCpcCq9o54sz7" src="https://plotly.com/embed.js" async></script>
 </div>
 
-
-<div>
-    <a href="https://plotly.com/~lloydshatkin/18/?share_key=OB76rhqkeGmtzNBTt8Hv3e" target="_blank" title="one_pie" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/18.png?share_key=OB76rhqkeGmtzNBTt8Hv3e" alt="one_pie" style="max-width: 100%;width: 800px;"  width="800" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
-    <script data-plotly="lloydshatkin:18" sharekey-plotly="OB76rhqkeGmtzNBTt8Hv3e" src="https://plotly.com/embed.js" async></script>
-</div>
-
-
+<br>
+<p class = "content">
+Again, I noticed quick jumps and peaks, rather than gradual buildups. Even in that last frame, in the last week, Tennis has jumped to 40% of my total weekly listens. As my last form of confirmation towards my hunch of being a binge listener, I decided to look at a few more of those pie charts, like the one showed in Figure 3.
+</p>
+<br>
 <div>
     <a href="https://plotly.com/~lloydshatkin/20/?share_key=vAgYTvgfnDscfOpEST9sFR" target="_blank" title="pie_sublot" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/20.png?share_key=vAgYTvgfnDscfOpEST9sFR" alt="pie_sublot" style="max-width: 100%;width: 900px;"  width="900" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:20" sharekey-plotly="vAgYTvgfnDscfOpEST9sFR" src="https://plotly.com/embed.js" async></script>
 </div>
+<p class="caption">
+Fig 5: Breakdown, by artist, of all the songs listened to in Weeks 1 - 9
+</p>
+<br>
+<p class = "content">
+Looking through these pie charts, while they only represent 9 out of 52 weeks, I decided my theory had legs. Looking through these charts, which display proportions of total weekly listens per artist, I see most weeks consist of a few large chunks, accompanied by many slivers. Week 7, for example shows The Strokes and Vampire Weekend dominating the week, with a bunch of other artists getting just a few listens.
+<br><br>
+Of course, not every week is the same. Looking at Week 5, we see the largest chunk does not even eclipse 10%. Yet, this variation makes the hunch even more worth investigating. So, without further ado, the rest of this article will display my various findings, as well as a comparison to help develop a better context of what these numbers represent.
+</p>
+<br>
+<hr>
+<p class="content-header"> Examining my Weekly Listening Habits </p>
+<hr>
+<br>
+<p class = "content">
+To start, I wanted to return to my top artists, and see their proportion of total weekly listens across all 52 weeks in the year. In the following chart, each artist has 52 data points, each representing the proportion of total weekly listens for that artist, for that week. The accompanying box plot for each artist provides a helpful summary of these data points, for the artists that have enough non-zero proportions to create a meaningful box plot, at least.
+
+</p>
+
 
 <div>
     <a href="https://plotly.com/~lloydshatkin/28/?share_key=8C46FjGHjxsd8CP4nDHblu" target="_blank" title="artist_props_box" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/28.png?share_key=8C46FjGHjxsd8CP4nDHblu" alt="artist_props_box" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:28" sharekey-plotly="8C46FjGHjxsd8CP4nDHblu" src="https://plotly.com/embed.js" async></script>
 </div>
+<br>
+<p class = "content">
+Looking at this graph, I notice two important concepts. First off, every artist has a pile of data points hovering near the bottom. What that means is that, even for my favorite artists, there are plenty of weeks where I listen to few, if any, songs by that artist. The other takeaway from this plot is that every artist, with the exception of Whitney, has a week (a data point) that exceeds the 25% threshold (all exceed 30% threshold except Tame Impala, with a max of roughly 27%). In summary, for many artists, there are plenty of weeks I forget about them completely, but when I do listen to that artist, I listen big.
+<br><br>
+The existence of a meaningful box plot - one that actually appears on the graph, which I would say occurs for The Grateful Dead, Twin Peaks and Tame Impala - indicates a more solid listening / following of that artist. While these bands may not all have the highest maxium proportion, they possess a solid middle class, meaning they are more commonly part of my weekly rotation.
+<br><br>
+This graph, while simple in its general idea, provides loads of rich information about my listening patterns and how those listening patterns relate to how much I like an artist. Even cooler, this graph shares a story of my past, like the second highest Beatles data point, with date 1/25/2020, connecting to my trip to Liverpool this past January. While I could talk about this graph for much longer, there is more we need to get to, so I will let it go for now.
+<br><br>
+Getting back to my overall thesis, the previous graph continues show a binge mentality, with so many points exceeding that 30% threshold. Moving from specific bands to generally listening habits, I created the next graph to really hone in on the potential binging pattern. 
+<br><br>
+The next plot uses the value of the <b>Nth Most Listened to Artist of the Week</b>. This value represents the 1st most, 2nd most, 3rd, etc. most listened to artist of that week (highest proportion). As a concrete example, if we look back at Figure 3, Unknown Mortal Orchestra would be the 1st most listened to artist of the week, following by Bob Dylan, Grateful Dead, Car Seat Headrest, an so on. Each week will have a different top artist, and each week's top artist will have a different Proportion of Total Weekly Listens (roughly 37% for UMO in Fig 3). The following plot shows the distributions, across all 52 weeks, of the Proportion of Total Weekly Listens, broken up by <b>Nth Most Listened to Artist of the Week</b>.
+</p>
+
 
 <div>
     <a href="https://plotly.com/~lloydshatkin/66/?share_key=0qbqFwE5OSu9GqaP2WxbKH" target="_blank" title="prop_bar_weekly" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/66.png?share_key=0qbqFwE5OSu9GqaP2WxbKH" alt="prop_bar_weekly" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:66" sharekey-plotly="0qbqFwE5OSu9GqaP2WxbKH" src="https://plotly.com/embed.js" async></script>
 </div>
-
+<br>
+<p class="content">
+So, on average (median, really, but looks like it would be close enough), every week, 25% of the songs I listen to are from one artist. 1 out of every 4 songs played is by the same artist. As for my second most listened to artist, this proportion drops in half, to roughly 12.5%. As discussed with Figure 5 with the numerous pie charts, there are certainly weeks that are not so lopsided, as that range for the most listened to artist dips all the way down to a mere 7%. But, even so, the median of 25% with a whopping maximum of 52.4% certainly displays some binging patterns. 
+<br><br>
+At this point, I want to bring in another dataset to make sure you understand the context of this number a little more. Getting your Spotify data is a somewhat tedious process, but thankfully my girlfriend, Dana, went through the process and sent me hers. So, let's take a look at this last figure, but now comparing Dana's listening patterns with mine.
+</p>
 <div>
-    <a href="https://plotly.com/~lloydshatkin/68/?share_key=sd8HoSa66rWCYYMp4XtDfW" target="_blank" title="prop_bar_weekly_facet" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/68.png?share_key=sd8HoSa66rWCYYMp4XtDfW" alt="prop_bar_weekly_facet" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
-    <script data-plotly="lloydshatkin:68" sharekey-plotly="sd8HoSa66rWCYYMp4XtDfW" src="https://plotly.com/embed.js" async></script>
+    <a href="https://plotly.com/~lloydshatkin/184/?share_key=jgzPxozWKEWUqySpal0gyd" target="_blank" title="prop_bar_weekly_comp" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/184.png?share_key=jgzPxozWKEWUqySpal0gyd" alt="prop_bar_weekly_comp" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
+    <script data-plotly="lloydshatkin:184" sharekey-plotly="jgzPxozWKEWUqySpal0gyd" src="https://plotly.com/embed.js" async></script>
 </div>
+<p class="content">
+Dana listens to music very differently than me, with her most listened to artist of the week usually only getting about 8% of total listens. And this makes sense. Dana uses the Radio feature on Spotify very often, as well as shuffling through her own playlists, rather than choosing an artist or two to focus on for the week. Hopefully this comparison provides a little more insight into the meaning of this graph, and as to why this graph, compared to all the others presented to far, really solidifies myself as a binge listener. 
+<br><br>
+But, if this chart was not enough for you, there is still more! More than just being heavily focused on one artist per week, my listening patterns display a general top-heavy trend. In order to analyze how top-heavy my listening is, I looked at how many artists it took to get me to 50% of my listening for the week, a variable I will call <b> Number of Artists to Half</b>. That is a little confusing, so let me show a picture to clarify.
+</p>
+
 
 <div>
     <a href="https://plotly.com/~lloydshatkin/85/?share_key=LNuJLj7AeXZCpjBdY8JP1O" target="_blank" title="one_pie_half_pull" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/85.png?share_key=LNuJLj7AeXZCpjBdY8JP1O" alt="one_pie_half_pull" style="max-width: 100%;width: 800px;"  width="800" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:85" sharekey-plotly="LNuJLj7AeXZCpjBdY8JP1O" src="https://plotly.com/embed.js" async></script>
 </div>
-
+<br>
+<p class="content">
+For this given week, Unknown Mortal Orchestra and Bob Dylan, 2 artists, represented over 50% of the songs I played for the week. So, for this week, the value of <b> Number of Artists to Half</b> would be 2. We can look at a few more, too:
+</p>
 
 <div>
     <a href="https://plotly.com/~lloydshatkin/82/?share_key=mpcRaE3niaZLIWOqVUkUkt" target="_blank" title="pie_half_pull_sublot" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/82.png?share_key=mpcRaE3niaZLIWOqVUkUkt" alt="pie_half_pull_sublot" style="max-width: 100%;width: 900px;"  width="900" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:82" sharekey-plotly="mpcRaE3niaZLIWOqVUkUkt" src="https://plotly.com/embed.js" async></script>
 </div>
-
+<br>
+<p class="content">
+For these 9 plots, the value of <b> Number of Artists to Half</b> would be 2, 4, 2, 3, 15, 2, 2, 2, 1, respectively. Lot of low numbers there, I know. So, the idea is that a low number, like 2 or 3, just means I binged 2 or 3 artists, instead of just 1. Now that the idea is solidified, here is the graph of my distribution:
+</p>
 <div>
     <a href="https://plotly.com/~lloydshatkin/87/?share_key=8Upl5SSemrPGHFvgVGaFKm" target="_blank" title="half_hist" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/87.png?share_key=8Upl5SSemrPGHFvgVGaFKm" alt="half_hist" style="max-width: 100%;width: 700px;"  width="700" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:87" sharekey-plotly="8Upl5SSemrPGHFvgVGaFKm" src="https://plotly.com/embed.js" async></script>
 </div>
-
-<div>
-    <a href="https://plotly.com/~lloydshatkin/184/?share_key=jgzPxozWKEWUqySpal0gyd" target="_blank" title="prop_bar_weekly_comp" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/184.png?share_key=jgzPxozWKEWUqySpal0gyd" alt="prop_bar_weekly_comp" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
-    <script data-plotly="lloydshatkin:184" sharekey-plotly="jgzPxozWKEWUqySpal0gyd" src="https://plotly.com/embed.js" async></script>
-</div>
-
+<p class="content">
+As expected, most weeks it takes less than 5 artists to make up 50% of my total weekly songs listened to. If that number does not seem to hit home, have a look at my distribution compared to Dana's:
+</p>
 <div>
     <a href="https://plotly.com/~lloydshatkin/182/?share_key=JjJDi679SWcpgggZ9iyFsa" target="_blank" title="half_hist_comp" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/182.png?share_key=JjJDi679SWcpgggZ9iyFsa" alt="half_hist_comp" style="max-width: 100%;width: 850px;"  width="850" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:182" sharekey-plotly="JjJDi679SWcpgggZ9iyFsa" src="https://plotly.com/embed.js" async></script>
 </div>
 
+<br>
+<p class="content">
+Dana's Number of Artists to Half peaks around 30, compared to my peak below 5. These graphs further display the top heavy nature of my listening.
+</p>
+<br>
+<hr>
+<h2 class="content-header"> Final Thoughts</h2>
+<hr>
+<br>
+<p class="content">
+TODO: wrap up, concluding thoughts, lead into final picture, which is just kinda cool and doesn't provide statistical evidence or anything.
+</p>
 <div>
     <a href="https://plotly.com/~lloydshatkin/177/?share_key=mRz2HAncV1Vq9Y7vTFsufD" target="_blank" title="weekly_breakdown_comp" style="display: block; text-align: center;"><img src="https://plotly.com/~lloydshatkin/177.png?share_key=mRz2HAncV1Vq9Y7vTFsufD" alt="weekly_breakdown_comp" style="max-width: 100%;width: 900px;"  width="900" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
     <script data-plotly="lloydshatkin:177" sharekey-plotly="mRz2HAncV1Vq9Y7vTFsufD" src="https://plotly.com/embed.js" async></script>
 </div>
- -->
+
 
