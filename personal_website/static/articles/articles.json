@@ -9,9 +9,11 @@
         "Plotly",
         "Data Viz"
       ],
+      "github" : "https://github.com/lshatkin/How_I_Listen/tree/master",
       "photos": [
         "/static/articles/spotify/img-1.png"
       ]
     }
   ]
+
 }

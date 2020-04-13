@@ -1,7 +1,8 @@
 body {
   height:100vh;
   font-family: 'Open Sans', sans-serif;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow: scroll;
 }
 
 html {
@@ -233,8 +234,9 @@ ul li a {
 
 @media only screen and (max-width: 1094px) {
   .fixed-wrapper {
-    position: static;
+    position: fixed;
   }
+
   .container {
     flex-direction: column;
   }
