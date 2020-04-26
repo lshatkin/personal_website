@@ -1,7 +1,7 @@
 import io
 import json
 import os
-
+import sys
 import datetime
 import time
 from flask import Flask, render_template, request, url_for, redirect
@@ -40,6 +40,7 @@ def projects():
 
 @personal_website.app.route('/articles')
 def articles():
+
     data = get_static_json("static/articles/articles.json")['articles']
     data.sort(key=order_projects_by_weight, reverse=True)
 
@@ -92,24 +93,6 @@ def project(title):
         selected['description'] = io.open(get_static_file(
             'static/%s/%s/%s.html' % (path, selected['link'], selected['link'])), "r", encoding="utf-8").read()
     return render_template('project.html', project=selected)
-
-@personal_website.app.route('/articles/<title>')
-def article(title):
-    articles = get_static_json("static/articles/articles.json")['articles']
-
-    in_art = next((p for p in articles if p['link'] == title), None)
-
-    if in_art is None:
-        return render_template('404.html'), 404
-    else:
-        selected = in_art
-
-    # # load html if the json file doesn't contain a description
-    if 'description' not in selected:
-        path = "articles"
-        selected['description'] = io.open(get_static_file(
-            'static/%s/%s/%s.html' % (path, selected['link'], selected['link'])), "r", encoding="utf-8").read()
-    return render_template('article.html', project=selected)
 
 
 @personal_website.app.errorhandler(404)

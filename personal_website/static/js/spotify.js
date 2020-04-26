@@ -11,24 +11,21 @@ var arc = d3.arc()
     .innerRadius(d => d.y0 * radius)
     .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1))
 
+// Partition function
 partition = data => {
   const root = data
   return d3.partition().size([2 * Math.PI, root.height + 1])(root);
 }
 
-function arcVisible(d) {
-    return d.y1 <= 3 && d.y0 >= 1 && d.x1 > d.x0;
-}
 
-function labelVisible(d) {
-    return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.03;
-}
+const svg1 = d3.select("#sunburst")
+    .attr("viewBox", [0, 0, width * 1.5, width * 1.5])
+    .style("font", "13px sans-serif");
 
-function labelTransform(d) {
-    const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-    const y = (d.y0 + d.y1) / 2 * radius;
-    return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
-}
+
+const svg2 = d3.select("#line")
+    .attr("viewBox", [0, 0, width, width])
+    .style("font", "10px sans-serif");
 
 d3.csv('/static/articles/spotify_d3/final_df.csv', function(error, vCsvData) {
         if (error) throw error;
@@ -40,19 +37,24 @@ d3.csv('/static/articles/spotify_d3/final_df.csv', function(error, vCsvData) {
             .sum(d => d.value)
             .sort((a, b) => d3.ascending(a.id, b.id))
 
-        drawViz(stratify_data);
+        drawSunburst(stratify_data, svg1);
+        drawCircle(svg2);
     });
 
-function drawViz(stratify_data) {
+function drawCircle(svgContainer){
+
+  var circle = svgContainer.append("circle")
+                           .attr("cx", 30)
+                           .attr("cy", 30)
+                           .attr("r", 20);
+}
+
+function drawSunburst(stratify_data, svg) {
   const root = partition(stratify_data);
 
   var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, stratify_data.children.length + 1))
 
   root.each(d => d.current = d);
-
-  const svg = d3.select("svg")
-    .attr("viewBox", [0, 0, width, width])
-    .style("font", "10px sans-serif");
 
   const g = svg.append("g")
     .attr("transform", `translate(${width / 2},${width / 2})`);
@@ -127,6 +129,20 @@ function drawViz(stratify_data) {
       }).transition(t)
         .attr("fill-opacity", d => +labelVisible(d.target))
         .attrTween("transform", d => () => labelTransform(d.current));
+  }
+
+  function arcVisible(d) {
+    return d.y1 <= 3 && d.y0 >= 1 && d.x1 > d.x0;
+  }
+
+  function labelVisible(d) {
+      return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.06;
+  }
+
+  function labelTransform(d) {
+      const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+      const y = (d.y0 + d.y1) / 2 * radius;
+      return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
   }
 }
 

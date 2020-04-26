@@ -8,6 +8,12 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .content {
   margin-right: 15%;
   margin-left: 15%;

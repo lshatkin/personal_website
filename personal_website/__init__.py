@@ -10,4 +10,5 @@ app = flask.Flask(__name__)  # pylint: disable=invalid-name
 app.config.from_object('personal_website.config')
 
 import personal_website.model  # noqa: E402  pylint: disable=wrong-import-position
+import personal_website.views 
 
