@@ -1,5 +1,7 @@
 
-// Variables
+
+
+// Variables for sunburst
 var width = 700;
 var radius = width / 6;
 var format = d3.format(",d")
@@ -11,48 +13,47 @@ var arc = d3.arc()
     .innerRadius(d => d.y0 * radius)
     .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1))
 
+
+
+
 // Partition function
 partition = data => {
   const root = data
   return d3.partition().size([2 * Math.PI, root.height + 1])(root);
 }
 
-
+// Create space for visuals
 const svg1 = d3.select("#sunburst")
-    .attr("viewBox", [0, 0, width * 1.5, width * 1.5])
+    .attr("viewBox", [0, 0, width * 1.5, width])
     .style("font", "13px sans-serif");
 
 
-const svg2 = d3.select("#line")
-    .attr("viewBox", [0, 0, width, width])
-    .style("font", "10px sans-serif");
 
-d3.csv('/static/articles/spotify_d3/final_df.csv', function(error, vCsvData) {
-        if (error) throw error;
-        console.log(vCsvData)
-        stratify_data = d3
-            .stratify()
-            .id(d => d.id)
-            .parentId(d => d.parent)(vCsvData)
-            .sum(d => d.value)
-            .sort((a, b) => d3.ascending(a.id, b.id))
+// Data
+d3.csv('/static/articles/spotify_d3/final_df.csv').then(function(vCsvData) {
+        d3.csv('/static/articles/spotify_d3/total_listens.csv').then(function(total_listens ) {
+          console.log(total_listens)
+          tabulate(total_listens, ["artistName", "total_listens"]);
+        
+          // console.log(vCsvData)
+          stratify_data = d3
+              .stratify()
+              .id(d => d.id)
+              .parentId(d => d.parent)(vCsvData)
+              .sum(d => d.value)
+              .sort((a, b) => d3.ascending(a.id, b.id))
 
-        drawSunburst(stratify_data, svg1);
-        drawCircle(svg2);
+          drawSunburst(stratify_data, total_listens, svg1);
+
+        });
     });
 
-function drawCircle(svgContainer){
 
-  var circle = svgContainer.append("circle")
-                           .attr("cx", 30)
-                           .attr("cy", 30)
-                           .attr("r", 20);
-}
 
-function drawSunburst(stratify_data, svg) {
+function drawSunburst(stratify_data, total_listens, svg, columns = ["artistName", "total_listens"]) {
   const root = partition(stratify_data);
 
-  var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, stratify_data.children.length + 1))
+  var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, stratify_data.children.length + 1));
 
   root.each(d => d.current = d);
 
@@ -96,8 +97,8 @@ function drawSunburst(stratify_data, svg) {
       .on("click", clicked);
   
   function clicked(p) {
-    
-    console.log(p.id);
+    filterTable(p)
+    console.log(p);
     
     parent.datum(p.parent || root);
 
@@ -144,6 +145,89 @@ function drawSunburst(stratify_data, svg) {
       const y = (d.y0 + d.y1) / 2 * radius;
       return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
   }
+
+
+  function filterTable(p) {
+    // var large_land = data.filter(function(d) { return d.land_area > 200; });
+    var genre = "Genre";
+    if (p.id == genre){
+      data = total_listens
+    } else {
+      data = total_listens.filter(d => d.genres == p.id);
+    }
+    d3.select("#med_inc").selectAll("*").remove()
+    var table = d3.select("#med_inc")
+        , columnNames = ["", "", "", "", ""]
+        , thead = table.append("thead")
+        , tbody = table.append("tbody");
+
+    // append the header row
+    thead.append("tr")
+        .selectAll("th")
+        .data(columnNames)
+        .enter()
+        .append("th")
+        .text(function (columnNames) { return columnNames; });
+
+    // create a row for each object in the data
+    var rows = tbody.selectAll("tr")
+        .data(data)
+        .enter()
+        .append("tr");
+
+    // create a cell in each row for each column
+    var cells = rows.selectAll("td")
+        .data(function (row) {
+            return columns.map(function (column) {
+                return { column: column, value: row[column] };
+            });
+        })
+        .enter()
+        .append("td")
+        .attr("style", "font-family: 'Lato'")
+          .html(d => d.value);
+  };
+
 }
+
+function tabulate(data, columns) {
+  var table = d3.select("#med_inc")
+      , columnNames = ["", "", "", "", ""]
+      , thead = table.append("thead")
+      , tbody = table.append("tbody");
+
+  // append the header row
+  thead.append("tr")
+      .selectAll("th")
+      .data(columnNames)
+      .enter()
+      .append("th")
+      .text(function (columnNames) { return columnNames; });
+
+  // create a row for each object in the data
+  var rows = tbody.selectAll("tr")
+      .data(data)
+      .enter()
+      .append("tr");
+
+  // create a cell in each row for each column
+  var cells = rows.selectAll("td")
+      .data(function (row) {
+          return columns.map(function (column) {
+              return { column: column, value: row[column] };
+          });
+      })
+      .enter()
+      .append("td")
+      .attr("style", "font-family: 'Lato'")
+        .html(d => d.value);
+  return data
+};
+
+
+
+
+
+
 
   
