@@ -134,3 +134,47 @@ span {
     width: auto !important;
   }
 }
+
+table.blueTable {
+  border: 0px solid #000102;
+  text-align: left;
+  counter-reset: rowNumber;
+}
+table.blueTable td, table.blueTable th {
+  border: 0px solid #AAAAAA;
+  padding: 20px 20px;
+}
+table.blueTable tbody td {
+  font-size: 20px;
+  color: #000000;
+  border-bottom: 1px solid #ddd;
+}
+table.blueTable thead {
+  background: #FFFFFF;
+  background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 66%, #FFFFFF 100%);
+  background: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 66%, #FFFFFF 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 66%, #FFFFFF 100%);
+  border-bottom: 2px solid #444444;
+}
+table.blueTable thead th {
+  font-size: 24px;
+  font-weight: bold;
+}
+table.blueTable tbody tr {
+  counter-increment: rowNumber;
+}
+table.blueTable tr td:first-child::before {
+  content: counter(rowNumber) " ";
+  padding-right: 1em;
+  text-align: right;
+}
+.floatLeft { width: 75%; float: left; }
+.floatRight {width: 100%; float: right; }
+.containerTables { 
+  max-width: none;
+  margin:0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+}

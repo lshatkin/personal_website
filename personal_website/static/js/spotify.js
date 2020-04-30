@@ -15,7 +15,6 @@ var arc = d3.arc()
 
 
 
-
 // Partition function
 partition = data => {
   const root = data
@@ -24,33 +23,30 @@ partition = data => {
 
 // Create space for visuals
 const svg1 = d3.select("#sunburst")
-    .attr("viewBox", [0, 0, width * 1.5, width])
+    .attr("viewBox", [0, 0, width * 1.5, width * 1.2])
     .style("font", "13px sans-serif");
 
 
 
 // Data
-d3.csv('/static/articles/spotify_d3/final_df.csv').then(function(vCsvData) {
-        d3.csv('/static/articles/spotify_d3/total_listens.csv').then(function(total_listens ) {
-          console.log(total_listens)
-          tabulate(total_listens, ["artistName", "total_listens"]);
+d3.csv('/static/articles/spotify_d3/data/final_df.csv').then(function(vCsvData) {
+  d3.csv('/static/articles/spotify_d3/data/total_listens.csv').then(function(total_listens_artist ) {
+    d3.csv('/static/articles/spotify_d3/data/total_listens_track.csv').then(function(total_listens_song) {
         
-          // console.log(vCsvData)
-          stratify_data = d3
-              .stratify()
-              .id(d => d.id)
-              .parentId(d => d.parent)(vCsvData)
-              .sum(d => d.value)
-              .sort((a, b) => d3.ascending(a.id, b.id))
+      stratify_data = d3
+          .stratify()
+          .id(d => d.id)
+          .parentId(d => d.parent)(vCsvData)
+          .sum(d => d.value)
+          .sort((a, b) => d3.ascending(a.id, b.id))
 
-          drawSunburst(stratify_data, total_listens, svg1);
-
-        });
+      draw(stratify_data, total_listens_artist, total_listens_song, svg1);
     });
+  });
+});
 
 
-
-function drawSunburst(stratify_data, total_listens, svg, columns = ["artistName", "total_listens"]) {
+function draw(stratify_data, total_listens_artist, total_listens_song, svg) {
   const root = partition(stratify_data);
 
   var color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, stratify_data.children.length + 1));
@@ -97,7 +93,7 @@ function drawSunburst(stratify_data, total_listens, svg, columns = ["artistName"
       .on("click", clicked);
   
   function clicked(p) {
-    filterTable(p)
+    displayTopArtists(p)
     console.log(p);
     
     parent.datum(p.parent || root);
@@ -147,17 +143,31 @@ function drawSunburst(stratify_data, total_listens, svg, columns = ["artistName"
   }
 
 
-  function filterTable(p) {
+
+  function displayTopArtists(p) {
     // var large_land = data.filter(function(d) { return d.land_area > 200; });
-    var genre = "Genre";
-    if (p.id == genre){
-      data = total_listens
+    d3.select("#table_l").selectAll("*").remove()
+    d3.select("#table_r").selectAll("*").remove()
+
+    if (p.id == "Genre"){
+      return;
     } else {
-      data = total_listens.filter(d => d.genres == p.id);
+      artist_data = total_listens_artist.filter(d => d.genres == p.id);
+      song_data = total_listens_song.filter(d => d.genres == p.id);
     }
-    d3.select("#med_inc").selectAll("*").remove()
-    var table = d3.select("#med_inc")
-        , columnNames = ["", "", "", "", ""]
+    artist_data = artist_data.slice(0, 5);
+    song_data = song_data.slice(0, 5);
+    console.log(song_data)
+
+    produceTable("#table_l", artist_data, ["artistName", "total_listens"], ["Artist", "Listens"])
+    produceTable("#table_r", song_data, ["artistName", "trackName", "total_listens_track"], 
+                                            ["Artist", "Song", "Listens"])
+
+  };
+
+  function produceTable(id, data, columns, column_names) {
+    var table = d3.select(id)
+        , columnNames = column_names
         , thead = table.append("thead")
         , tbody = table.append("tbody");
 
@@ -186,43 +196,9 @@ function drawSunburst(stratify_data, total_listens, svg, columns = ["artistName"
         .append("td")
         .attr("style", "font-family: 'Lato'")
           .html(d => d.value);
-  };
+  }
 
 }
-
-function tabulate(data, columns) {
-  var table = d3.select("#med_inc")
-      , columnNames = ["", "", "", "", ""]
-      , thead = table.append("thead")
-      , tbody = table.append("tbody");
-
-  // append the header row
-  thead.append("tr")
-      .selectAll("th")
-      .data(columnNames)
-      .enter()
-      .append("th")
-      .text(function (columnNames) { return columnNames; });
-
-  // create a row for each object in the data
-  var rows = tbody.selectAll("tr")
-      .data(data)
-      .enter()
-      .append("tr");
-
-  // create a cell in each row for each column
-  var cells = rows.selectAll("td")
-      .data(function (row) {
-          return columns.map(function (column) {
-              return { column: column, value: row[column] };
-          });
-      })
-      .enter()
-      .append("td")
-      .attr("style", "font-family: 'Lato'")
-        .html(d => d.value);
-  return data
-};
 
 
 
