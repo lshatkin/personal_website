@@ -1,0 +1,237 @@
+,id,value,parent,num_child
+0,Genre,,,
+1,stomp and holler,0.0,Genre,1.0
+2,stomp and holler ,113.0,stomp and holler,0.0
+3,hip hop,0.0,Genre,37.0
+4,hip hop ,205.0,hip hop,0.0
+5,rap,0.0,Genre,46.0
+6,rap ,195.0,rap,0.0
+7,edm,0.0,Genre,6.0
+8,edm ,73.0,edm,0.0
+9,pop,0.0,Genre,70.0
+10,pop ,172.0,pop,0.0
+11,r&b,0.0,Genre,11.0
+12,r&b ,45.0,r&b,0.0
+13,soul,0.0,Genre,19.0
+14,soul ,99.0,soul,0.0
+15,jazz,0.0,Genre,32.0
+16,jazz ,30.0,jazz,0.0
+17,rock,0.0,Genre,57.0
+18,rock ,209.0,rock,0.0
+19,funk,0.0,Genre,10.0
+20,funk ,99.0,funk,0.0
+21,folk,0.0,Genre,13.0
+22,folk ,55.0,folk,0.0
+23,house,0.0,Genre,24.0
+24,house ,12.0,house,0.0
+25,blues,0.0,Genre,17.0
+26,blues ,17.0,blues,0.0
+27,country,0.0,Genre,10.0
+28,country ,23.0,country,0.0
+29,indietronica,0.0,Genre,2.0
+30,indietronica ,115.0,indietronica,0.0
+31,east coast hip hop,47.0,hip hop,0.0
+32,old school hip hop,9.0,hip hop,0.0
+33,atl hip hop,25.0,hip hop,0.0
+34,miami hip hop,10.0,hip hop,0.0
+35,r&b en espanol,2.0,r&b,0.0
+36,new jersey rap,8.0,rap,0.0
+37,queens hip hop,9.0,hip hop,0.0
+38,west coast rap,14.0,rap,0.0
+39,dirty south rap,24.0,rap,0.0
+40,southern hip hop,87.0,hip hop,0.0
+41,hardcore hip hop,53.0,hip hop,0.0
+42,new orleans funk,9.0,funk,0.0
+43,rhythm and blues,11.0,blues,0.0
+44,new orleans jazz,8.0,jazz,0.0
+45,conscious hip hop,36.0,hip hop,0.0
+46,new orleans blues,6.0,blues,0.0
+47,deep groove house,3.0,house,0.0
+48,australian hip hop,10.0,hip hop,0.0
+49,brill building pop,41.0,pop,0.0
+50,alternative hip hop,0.0,hip hop,2.0
+51,alternative hip hop ,64.0,alternative hip hop,0.0
+52,underground hip hop,0.0,hip hop,3.0
+53,underground hip hop ,83.0,underground hip hop,0.0
+54,uk contemporary r&b,12.0,r&b,0.0
+55,canadian contemporary r&b,4.0,r&b,0.0
+56,g funk,7.0,funk,0.0
+57,p funk,2.0,funk,0.0
+58,pop edm,18.0,edm,0.0
+59,nu jazz,10.0,jazz,0.0
+60,art pop,95.0,pop,0.0
+61,hip pop,29.0,pop,0.0
+62,pop rap,0.0,rap,2.0
+63,pop rap ,132.0,pop rap,0.0
+64,neo r&b,10.0,r&b,0.0
+65,art rock,69.0,rock,0.0
+66,cali rap,8.0,rap,0.0
+67,neo soul,37.0,soul,0.0
+68,jazz rap,14.0,rap,0.0
+69,pop rock,0.0,pop,2.0
+70,pop rock ,66.0,pop rock,0.0
+71,dream pop,0.0,pop,3.0
+72,dream pop ,53.0,dream pop,0.0
+73,indie pop,0.0,pop,3.0
+74,indie pop ,211.0,indie pop,0.0
+75,soft rock,77.0,rock,0.0
+76,jazz trio,0.0,jazz,2.0
+77,jazz trio ,4.0,jazz trio,0.0
+78,dance pop,114.0,pop,0.0
+79,free jazz,4.0,jazz,0.0
+80,folk punk,10.0,folk,0.0
+81,trap soul,11.0,rap,0.0
+82,power pop,0.0,pop,2.0
+83,power pop ,14.0,power pop,0.0
+84,cool jazz,30.0,jazz,0.0
+85,indie r&b,49.0,r&b,0.0
+86,hard rock,0.0,rock,4.0
+87,hard rock ,34.0,hard rock,0.0
+88,noise pop,74.0,pop,0.0
+89,folk rock,0.0,rock,3.0
+90,folk rock ,114.0,folk rock,0.0
+91,soul jazz,13.0,soul,0.0
+92,jazz funk,15.0,jazz,0.0
+93,bass house,2.0,house,0.0
+94,vapor soul,37.0,soul,0.0
+95,jazz blues,10.0,jazz,0.0
+96,album rock,77.0,rock,0.0
+97,dance rock,36.0,rock,0.0
+98,indie rock,0.0,rock,8.0
+99,indie rock ,218.0,indie rock,0.0
+100,vapor trap,16.0,rap,0.0
+101,soul blues,7.0,soul,0.0
+102,synth funk,3.0,funk,0.0
+103,freak folk,97.0,folk,0.0
+104,deep house,7.0,house,0.0
+105,philly rap,7.0,rap,0.0
+106,indie soul,92.0,soul,0.0
+107,gaming edm,4.0,edm,0.0
+108,indie jazz,14.0,jazz,0.0
+109,indie folk,0.0,folk,3.0
+110,indie folk ,138.0,indie folk,0.0
+111,jazz piano,0.0,jazz,2.0
+112,jazz piano ,14.0,jazz piano,0.0
+113,roots rock,121.0,rock,0.0
+114,retro soul,11.0,soul,0.0
+115,funk metal,3.0,funk,0.0
+116,vocal jazz,0.0,jazz,2.0
+117,vocal jazz ,31.0,vocal jazz,0.0
+118,blues rock,0.0,rock,2.0
+119,blues rock ,62.0,blues rock,0.0
+120,bedroom pop,21.0,pop,0.0
+121,disco house,5.0,house,0.0
+122,vocal house,2.0,house,0.0
+123,dutch house,4.0,house,0.0
+124,future funk,2.0,funk,0.0
+125,jazz fusion,0.0,jazz,2.0
+126,jazz fusion ,18.0,jazz fusion,0.0
+127,chicago rap,20.0,rap,0.0
+128,modern funk,14.0,funk,0.0
+129,shimmer pop,43.0,pop,0.0
+130,baroque pop,25.0,pop,0.0
+131,float house,4.0,house,0.0
+132,piano blues,4.0,blues,0.0
+133,garage rock,0.0,rock,3.0
+134,garage rock ,69.0,garage rock,0.0
+135,delta blues,4.0,blues,0.0
+136,chamber pop,130.0,pop,0.0
+137,texas blues,3.0,blues,0.0
+138,modern rock,146.0,rock,0.0
+139,melodic rap,15.0,rap,0.0
+140,classic soul,44.0,soul,0.0
+141,jazz trumpet,7.0,jazz,0.0
+142,bedroom soul,5.0,soul,0.0
+143,memphis soul,9.0,soul,0.0
+144,classic rock,120.0,rock,0.0
+145,country road,17.0,country,0.0
+146,british folk,4.0,folk,0.0
+147,ambient folk,4.0,folk,0.0
+148,british soul,7.0,soul,0.0
+149,chicago soul,6.0,soul,0.0
+150,modern blues,11.0,blues,0.0
+151,gangster rap,68.0,rap,0.0
+152,filter house,9.0,house,0.0
+153,country rock,0.0,rock,2.0
+154,country rock ,80.0,country rock,0.0
+155,vintage jazz,3.0,jazz,0.0
+156,country dawn,3.0,country,0.0
+157,chicago house,2.0,house,0.0
+158,british blues,6.0,blues,0.0
+159,electro house,0.0,house,2.0
+160,electro house ,36.0,electro house,0.0
+161,post-teen pop,51.0,pop,0.0
+162,memphis blues,2.0,blues,0.0
+163,northern soul,5.0,soul,0.0
+164,southern soul,29.0,soul,0.0
+165,texas country,7.0,country,0.0
+166,bubblegum pop,18.0,pop,0.0
+167,canadian folk,5.0,folk,0.0
+168,chicago blues,3.0,blues,0.0
+169,country blues,4.0,blues,0.0
+170,outlaw country,12.0,country,0.0
+171,outsider house,2.0,house,0.0
+172,australian r&b,4.0,r&b,0.0
+173,jazz saxophone,7.0,jazz,0.0
+174,edmonton indie,5.0,edm,0.0
+175,australian pop,20.0,pop,0.0
+176,tropical house,0.0,house,2.0
+177,tropical house ,61.0,tropical house,0.0
+178,electric blues,22.0,blues,0.0
+179,acoustic blues,5.0,blues,0.0
+180,alternative r&b,64.0,r&b,0.0
+181,electronic trap,11.0,rap,0.0
+182,indie poptimism,40.0,pop,0.0
+183,harmonica blues,2.0,blues,0.0
+184,louisiana blues,7.0,blues,0.0
+185,traditional folk,34.0,folk,0.0
+186,psychedelic rock,0.0,rock,2.0
+187,psychedelic rock ,58.0,psychedelic rock,0.0
+188,alternative rock,0.0,rock,7.0
+189,alternative rock ,109.0,alternative rock,0.0
+190,psychedelic folk,0.0,folk,2.0
+191,psychedelic folk ,3.0,psychedelic folk,0.0
+192,experimental pop,61.0,pop,0.0
+193,oklahoma country,2.0,country,0.0
+194,avant-garde jazz,3.0,jazz,0.0
+195,australian house,2.0,house,0.0
+196,indie anthem-folk,5.0,folk,0.0
+197,progressive house,12.0,house,0.0
+198,traditional blues,9.0,blues,0.0
+199,contemporary jazz,0.0,jazz,2.0
+200,contemporary jazz ,9.0,contemporary jazz,0.0
+201,instrumental funk,6.0,funk,0.0
+202,alternative country,24.0,country,0.0
+203,french indietronica,10.0,indietronica,0.0
+204,contemporary country,20.0,country,0.0
+205,uk alternative hip hop,3.0,alternative hip hop,0.0
+206,bc underground hip hop,1.0,underground hip hop,0.0
+207,deep underground hip hop,12.0,underground hip hop,0.0
+208,indie pop rap,15.0,pop rap,0.0
+209,indie dream pop,2.0,dream pop,0.0
+210,modern hard rock,2.0,hard rock,0.0
+211,modern power pop,9.0,power pop,0.0
+212,french indie pop,11.0,indie pop,0.0
+213,modern jazz trio,1.0,jazz trio,0.0
+214,modern dream pop,7.0,dream pop,0.0
+215,modern folk rock,17.0,folk rock,0.0
+216,modern jazz piano,2.0,jazz piano,0.0
+217,modern blues rock,13.0,blues rock,0.0
+218,swedish hard rock,2.0,hard rock,0.0
+219,melodic hard rock,1.0,hard rock,0.0
+220,indie garage rock,106.0,garage rock,0.0
+221,english indie rock,7.0,indie rock,0.0
+222,deep tropical house,6.0,tropical house,0.0
+223,modern country rock,9.0,country rock,0.0
+224,canadian indie folk,2.0,indie folk,0.0
+225,alternative pop rock,1.0,pop rock,0.0
+226,uk contemporary jazz,1.0,contemporary jazz,0.0
+227,australian indie rock,4.0,indie rock,0.0
+228,australian indie folk,4.0,indie folk,0.0
+229,contemporary vocal jazz,2.0,vocal jazz,0.0
+230,modern psychedelic folk,1.0,psychedelic folk,0.0
+231,modern alternative rock,33.0,alternative rock,0.0
+232,progressive jazz fusion,2.0,jazz fusion,0.0
+233,japanese psychedelic rock,1.0,psychedelic rock,0.0
+234,progressive electro house,10.0,electro house,0.0
+235,christian alternative rock,2.0,alternative rock,0.0
