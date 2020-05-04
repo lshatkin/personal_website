@@ -68,7 +68,7 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
     .attr("d", d => arc(d.current))
     .style("cursor", d => arcVisible(d.current) ? "pointer" : "default")
-    .on("click", d => arcVisible(d.current) ? displayGenreData : doNothing );
+    .on("click", displayGenreData );
  
   path.filter(d => d.children)
       .style("cursor", "pointer")
@@ -148,9 +148,6 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
       return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
   }
 
-  function doNothing(p){
-    return;
-  }
 
   function displayGenreData(p) {
 
