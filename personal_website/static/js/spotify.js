@@ -67,8 +67,8 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.id); })
     .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
     .attr("d", d => arc(d.current))
-    .style("cursor", d => arcVisible(d.current) ? "pointer" : "default")
-    .on("click", displayGenreData );
+    .style("cursor", "pointer")
+    .on("click", displayGenreData);
  
   path.filter(d => d.children)
       .style("cursor", "pointer")
