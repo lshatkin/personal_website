@@ -157,6 +157,7 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     d3.select("#bar_race").selectAll("*").remove()
     d3.select("#seq_sunburst").selectAll("*").remove()
     d3.select("#seq_description").selectAll("*").remove()
+    d3.select("#hi_bar").selectAll("*").remove()
 
     console.log(p)
     if (p.id.trim() == "Genre" || p.height > 0){
@@ -168,17 +169,262 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     }
 
     d3.csv('/static/articles/spotify_d3/data/bar_race_data/' + p.id.trim() + '.csv', d3.autoType).then(function(data) {
-      d3.json('/static/articles/spotify_d3/data/time_hierarchy_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(time_data) {
-        produceSeqSunburst(time_data, total_listens_genre, p.id.trim());
-        produceBarRace(data);
-        produceTable("#table_l", artist_data, ["artistName", "total_listens"], ["Artist", "Listens"])
-        produceTable("#table_r", song_data, ["artistName", "trackName", "total_listens_track"], 
-                                                ["Artist", "Song", "Listens"])
-        smoothScroll("table_l")
-      })
-    });
+      produceBarRace(data);
+      produceTable("#table_l", artist_data, ["artistName", "total_listens"], ["Artist", "Listens"])
+      produceTable("#table_r", song_data, ["artistName", "trackName", "total_listens_track"], 
+                                              ["Artist", "Song", "Listens"])
+      smoothScroll("table_l")
+    }).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(time_data) {
+      produceSeqSunburst(time_data, total_listens_genre, p.id.trim());
+    })).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_with_artist_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(artist_time_data){
+      produceHierarchyBar(artist_time_data, p.id.trim());
+    }));
 
   };
+
+  function produceHierarchyBar(data, genre){
+    console.log(data)
+
+    var margin = ({top: 30, right: 30, bottom: 0, left: 100});
+    var width = 700;
+    var x = d3.scaleLinear().range([margin.left, width - margin.right]);
+    var barStep = 40;
+    var barPadding = 3 / barStep;
+    var getHeight = function() {
+        let max = 1;
+        root.each(d => d.children && (max = Math.max(max, 16)));
+        return max * barStep + margin.top + margin.bottom;
+    };
+    var height = getHeight()
+    
+    var xAxis = g => g
+      .attr("class", "x-axis")
+      .style("font-size", "18px")
+      .attr("transform", `translate(0,${margin.top})`)
+      .call(d3.axisTop(x).ticks(width / 80, "s"))
+      .call(g => (g.selection ? g.selection() : g).select(".domain").remove());
+
+    var yAxis = g => g
+      .attr("class", "y-axis")
+      .attr("transform", `translate(${margin.left + 0.5},0)`)
+      .call(g => g.append("line")
+          .attr("stroke", "currentColor")
+          .attr("y1", margin.top)
+          .attr("y2", height - margin.bottom));
+
+
+    var color = d3.scaleOrdinal([true, false], ["steelblue", "#aaa"]);
+    var duration = 750;
+    
+    console.log(data)
+    console.log(height)
+
+    chart = function(){
+      const root = d3.hierarchy(data)
+        .sum(d => d.value)
+        .sort((a, b) => b.value - a.value)
+        .eachAfter(d => d.index = d.parent ? d.parent.index = d.parent.index + 1 || 0 : 0);
+
+      const svg = d3.select("#hi_bar")
+          .attr("viewBox", [-160, 0, width * 1.5, height]);  
+
+
+      x.domain([0, root.value]);
+
+      svg.append("rect")
+          .attr("class", "background")
+          .attr("fill", "none")
+          .attr("pointer-events", "all")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("cursor", "pointer")
+          .on("click", d => up(svg, d));
+
+      svg.append("g")
+          .call(xAxis);
+
+      svg.append("g")
+          .call(yAxis);
+
+      down(svg, root);
+
+      return svg.node();
+    }
+
+    chart();
+
+    function bar(svg, down, d, selector) {
+      const g = svg.insert("g", selector)
+          .attr("class", "enter")
+          .attr("transform", `translate(0,${margin.top + barStep * barPadding})`)
+          .attr("text-anchor", "end")
+          .style("font", "10px sans-serif");
+
+      const bar = g.selectAll("g")
+        .data(d.children.slice(0,15))
+        .join("g")
+          .attr("cursor", d => !d.children ? null : "pointer")
+          .on("click", d => down(svg, d));
+
+      bar.append("text")
+          .attr("x", margin.left - 6)
+          .attr("y", barStep * (1 - barPadding) / 2)
+          .attr("dy", ".35em")
+          .text(d => {
+            if (d.data.name.length > 20) {
+              return d.data.name.slice(0,18) + "...";
+            }
+            return d.data.name;
+          })
+          .style("font-size", "22px");
+
+      bar.append("rect")
+          .attr("x", x(0))
+          .attr("width", d => x(d.value) - x(0))
+          .attr("height", barStep * (1 - barPadding));
+
+      return g;
+    }
+
+    function down(svg, d) {
+      if (!d.children || d3.active(svg.node())) return;
+
+      // Rebind the current node to the background.
+      svg.select(".background").datum(d);
+
+      // Define two sequenced transitions.
+      const transition1 = svg.transition().duration(duration);
+      const transition2 = transition1.transition();
+
+      // Mark any currently-displayed bars as exiting.
+      const exit = svg.selectAll(".enter")
+          .attr("class", "exit");
+
+      // Entering nodes immediately obscure the clicked-on bar, so hide it.
+      exit.selectAll("rect")
+          .attr("fill-opacity", p => p === d ? 0 : null);
+
+      // Transition exiting bars to fade out.
+      exit.transition(transition1)
+          .attr("fill-opacity", 0)
+          .remove();
+
+      // Enter the new bars for the clicked-on data.
+      // Per above, entering bars are immediately visible.
+      const enter = bar(svg, down, d, ".y-axis")
+          .attr("fill-opacity", 0);
+
+      // Have the text fade-in, even though the bars are visible.
+      enter.transition(transition1)
+          .attr("fill-opacity", 1);
+
+      // Transition entering bars to their new y-position.
+      enter.selectAll("g")
+          .attr("transform", stack(d.index))
+        .transition(transition1)
+          .attr("transform", stagger());
+
+      // Update the x-scale domain.
+      x.domain([0, d3.max(d.children, d => d.value)]);
+
+      // Update the x-axis.
+      svg.selectAll(".x-axis").transition(transition2)
+          .call(xAxis);
+
+      // Transition entering bars to the new x-scale.
+      enter.selectAll("g").transition(transition2)
+          .attr("transform", (d, i) => `translate(0,${barStep * i})`);
+
+      // Color the bars as parents; they will fade to children if appropriate.
+      enter.selectAll("rect")
+          .attr("fill", color(true))
+          .attr("fill-opacity", 1)
+        .transition(transition2)
+          .attr("fill", d => color(!!d.children))
+          .attr("width", d => x(d.value) - x(0));
+    }
+
+    function up(svg, d) {
+      if (!d.parent || !svg.selectAll(".exit").empty()) return;
+
+      // Rebind the current node to the background.
+      svg.select(".background").datum(d.parent);
+
+      // Define two sequenced transitions.
+      const transition1 = svg.transition().duration(duration);
+      const transition2 = transition1.transition();
+
+      // Mark any currently-displayed bars as exiting.
+      const exit = svg.selectAll(".enter")
+          .attr("class", "exit");
+
+      // Update the x-scale domain.
+      x.domain([0, d3.max(d.parent.children, d => d.value)]);
+
+      // Update the x-axis.
+      svg.selectAll(".x-axis").transition(transition1)
+          .call(xAxis);
+
+      // Transition exiting bars to the new x-scale.
+      exit.selectAll("g").transition(transition1)
+          .attr("transform", stagger());
+
+      // Transition exiting bars to the parent’s position.
+      exit.selectAll("g").transition(transition2)
+          .attr("transform", stack(d.index));
+
+      // Transition exiting rects to the new scale and fade to parent color.
+      exit.selectAll("rect").transition(transition1)
+          .attr("width", d => x(d.value) - x(0))
+          .attr("fill", color(true));
+
+      // Transition exiting text to fade out.
+      // Remove exiting nodes.
+      exit.transition(transition2)
+          .attr("fill-opacity", 0)
+          .remove();
+
+      // Enter the new bars for the clicked-on data's parent.
+      const enter = bar(svg, down, d.parent, ".exit")
+          .attr("fill-opacity", 0);
+
+      enter.selectAll("g")
+          .attr("transform", (d, i) => `translate(0,${barStep * i})`);
+
+      // Transition entering bars to fade in over the full duration.
+      enter.transition(transition2)
+          .attr("fill-opacity", 1);
+
+      // Color the bars as appropriate.
+      // Exiting nodes will obscure the parent bar, so hide it.
+      // Transition entering rects to the new x-scale.
+      // When the entering parent rect is done, make it visible!
+      enter.selectAll("rect")
+          .attr("fill", d => color(!!d.children))
+          .attr("fill-opacity", p => p === d ? 0 : null)
+        .transition(transition2)
+          .attr("width", d => x(d.value) - x(0))
+          .on("end", function(p) { d3.select(this).attr("fill-opacity", 1); });
+    }
+
+    function stack(i) {
+      let value = 0;
+      return d => {
+        const t = `translate(${x(value) - x(0)},${barStep * i})`;
+        value += d.value;
+        return t;
+      };
+    }
+
+    function stagger() {
+      let value = 0;
+      return (d, i) => {
+        const t = `translate(${x(value) - x(0)},${barStep * i})`;
+        value += d.value;
+        return t;
+      };
+    }
+  }
 
   function produceSeqSunburst(data, total_listens, genre){
 
@@ -457,7 +703,7 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     var prev = new Map(nameframes.flatMap(([, data]) => d3.pairs(data, (a, b) => [b, a])));
     var next = new Map(nameframes.flatMap(([, data]) => d3.pairs(data)));
     var margin = ({top: 14, right: 6, bottom: 6, left: 0});
-    var barSize = 52;
+    var barSize = 55;
     var height = margin.top + barSize * n + margin.bottom + 100;
     
     let x = d3.scaleLinear([0, 1], [margin.left, width - margin.right])
@@ -516,8 +762,7 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
 
     function labels(svg) {
         let label = svg.append("g")
-            .style("font", "bold 12px var(--sans-serif)")
-            .style("font-size", "20px")
+            .style("font-size", "24px")
             .style("font-variant-numeric", "tabular-nums")
             .attr("text-anchor", "end")
           .selectAll("text");
@@ -574,7 +819,7 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     function ticker(svg) {
       const now = svg.append("text")
           .style("font", "bold")
-          .style("font-size", "42px")
+          .style("font-size", "62px")
           .style("font-variant-numeric", "tabular-nums")
           .attr("text-anchor", "end")
           .attr("x", width - 6)
@@ -591,19 +836,19 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
       // replay;
 
       const svg = d3.select("#bar_race")
-          .attr("viewBox", [0, -100, width, height]);
+          .attr("viewBox", [0, -150, width, height*1.1]);
 
       let title = svg.append("text")
          .attr("class", "title")
          .attr("y", -65)
          .text("Top Artists over the Years")
-         .style("font-size" , "24");
+         .style("font-size" , "28");
 
       let subTitle = svg.append("text")
          .attr("class", "subTitle")
          .attr("y", -20)
          .text("Total Songs Listened to by Artist")
-         .style("font-size" , "18px");
+         .style("font-size" , "22px");
       const updateBars = bars(svg);
       const updateAxis = axis(svg);
       const updateLabels = labels(svg);

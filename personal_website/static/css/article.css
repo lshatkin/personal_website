@@ -157,7 +157,7 @@ table.blueTable td, table.blueTable th {
   padding: 40px 10px;
 }
 table.blueTable tbody td {
-  font-size: 20px;
+  font-size: 24px;
   color: #000000;
   border-bottom: 1px solid #ddd;
 }
@@ -169,7 +169,7 @@ table.blueTable thead {
   border-bottom: 2px solid #444444;
 }
 table.blueTable thead th {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
 }
 table.blueTable tbody tr {
