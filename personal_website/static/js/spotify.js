@@ -1,18 +1,6 @@
 
 
 
-// Variables for sunburst
-var width = 700;
-var radius = width / 4;
-var format = d3.format(",d")
-var arc = d3.arc()
-    .startAngle(d => d.x0)
-    .endAngle(d => d.x1)
-    .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
-    .padRadius(radius * 1.5)
-    .innerRadius(d => d.y0 * radius)
-    .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1))
-
 
 
 // Partition function
@@ -45,6 +33,24 @@ d3.csv('/static/articles/spotify_d3/data/genre_hierarchy.csv').then(function(vCs
 
 
 function draw(stratify_data, total_listens_artist, total_listens_song, enriched_song_data) {
+
+  document.getElementById("genreHeader").style.display = "none";
+  document.getElementById("genreContent").style.display = "none";
+  document.getElementById("timeHeader").style.display = "none";
+  document.getElementById("timeContent").style.display = "none";
+  document.getElementById("timeContent2").style.display = "none";
+
+  // Variables for sunburst
+  var width = 700;
+  var radius = width / 4;
+  var format = d3.format(",d")
+  var arc = d3.arc()
+      .startAngle(d => d.x0)
+      .endAngle(d => d.x1)
+      .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+      .padRadius(radius * 1.5)
+      .innerRadius(d => d.y0 * radius)
+      .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1))
 
   const svg = d3.select("#sunburst")
       .attr("viewBox", [-140, -50, width * 1.5, width * 1.2])
@@ -151,7 +157,6 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
 
   function displayGenreData(p) {
 
-    // var large_land = data.filter(function(d) { return d.land_area > 200; });
     d3.select("#table_l").selectAll("*").remove()
     d3.select("#table_r").selectAll("*").remove()
     d3.select("#bar_race").selectAll("*").remove()
@@ -159,7 +164,14 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     d3.select("#seq_description").selectAll("*").remove()
     d3.select("#hi_bar").selectAll("*").remove()
 
-    console.log(p)
+    document.getElementById("genreHeader").style.display = "none";
+    document.getElementById("genreContent").style.display = "none";
+    document.getElementById("timeHeader").style.display = "none";
+    document.getElementById("timeContent").style.display = "none";
+    document.getElementById("timeContent2").style.display = "none";
+
+
+    
     if (p.id.trim() == "Genre" || p.height > 0){
       return;
     } else {
@@ -169,11 +181,10 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     }
 
     d3.csv('/static/articles/spotify_d3/data/bar_race_data/' + p.id.trim() + '.csv', d3.autoType).then(function(data) {
+      produceText(p.id.trim());
       produceBarRace(data);
       produceTable("#table_l", artist_data, ["artistName", "total_listens"], ["Artist", "Listens"])
-      produceTable("#table_r", song_data, ["artistName", "trackName", "total_listens_track"], 
-                                              ["Artist", "Song", "Listens"])
-      smoothScroll("table_l")
+      smoothScroll("genreHeader")
     }).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(time_data) {
       produceSeqSunburst(time_data, total_listens_genre, p.id.trim());
     })).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_with_artist_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(artist_time_data){
@@ -181,6 +192,36 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     }));
 
   };
+
+  function produceText(genre){
+    var split_genre = genre.split(' ');
+    var end_genre = '';
+    for (var i = 0; i < split_genre.length; i++){
+      var g = split_genre[i]
+      var g_good = g[0].toUpperCase() + g.slice(1);
+      var end_genre = end_genre + g_good + " ";
+    }
+
+    document.getElementById("genreHeader").textContent = 'Top Artists of Genre ' + end_genre;
+
+    var content = "The following charts display the top artists for this genre, but of all time (on the left) \
+                    and over time (bar chart race on the right). 'Listens' means total songs listened \
+                    to by that artist. "
+    document.getElementById("genreContent").textContent = content;
+
+    document.getElementById("genreHeader").style.display = "block";
+    document.getElementById("genreContent").style.display = "block";
+
+    document.getElementById("timeHeader").textContent = "Listening Patterns based on Time for " + end_genre;
+
+    document.getElementById("timeHeader").style.display = "block";
+    document.getElementById("timeContent").style.display = "block";
+    document.getElementById("timeContent2").style.display = "block";
+
+    
+
+
+  }
 
   function produceHierarchyBar(data, genre){
     console.log(data)

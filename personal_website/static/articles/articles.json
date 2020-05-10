@@ -11,20 +11,20 @@
       ],
       "github" : "https://github.com/lshatkin/How_I_Listen/tree/master",
       "photos": [
-        "/static/articles/spotify/img-1.png"
+        "/static/articles/spotify/pie_chart.png"
       ]
     },
     {
-      "name": "How I Listen: Exploring my Spotify Listening Habits using Plotly",
+      "name": "What I Listen: Exploring my Spotify Listening Habits using D3.js",
       "link": "spotify_d3",
       "date": "March 2020",
-      "weight": 7,
+      "weight": 8,
       "tags": [
         "D3",
         "Data Viz"
       ],
       "photos": [
-        "/static/articles/spotify_d3/img-1.png"
+        "/static/articles/spotify_d3/sunburst.png"
       ]
     }
   ]

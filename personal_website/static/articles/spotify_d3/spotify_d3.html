@@ -1,7 +1,41 @@
 
+<p class="content-header1"> Overview </p>
+<hr>
+<p class="content"> 
+
+After a long battle with the folks over at Spotify, I was finally able to get my entire listening history on Spotify (well, at least from 2016 until now). This achievement also coincided with a newfound interest in D3.js, a JavaScript library with strong data visualization tools (thanks to Daniel for introducing me). So, I decided to dive head first into the weeds of D3, and I came out the other end with the following <b>interactive visualizations </b>. D3 was certainly a pain at some points, but I am extremely pleased with the end result, and excited to continue learning the intricacies of the library after this. 
+
+<br><br>
+
+As with my <a href = http://www.lloydshatkin.com/articles/spotify> other Spotify research article</a>, I know it is less exciting to see MY spotify listening history rather than yours. As I mentioned last time, if you want to get your data from Spotify - which is difficult but also just sending emails so not too arduous - I am happy to create these same analyses and visualizations for you. I hope you enjoy this small ineractive playground I created, and please reach out with any questions and comments!
+
+<br>
+</p>
+<p class="content-header1"> The Fun Stuff </p>
+<hr>
+<p class="content-header2"> Choose your Genre </p>
+<p class="content"> 
+First off, a helpful hint moving forward: zoom out a little on your screen to be able to see the graphics a little more easily, just to 75% or so. 
+<br><br>
+D3 provides a great framework for working with interactive hiearachies. I decided to start my article here, with a <b>zoomable sunburst</b> that displays genre hierarchies. The genres displayed are the genres provided by Spotify for the artists I listen to. Artists can be classified as several genres, so don't be surprised to see the same artist across different genres. Further, I created the hierarachy of genres purely based on the name of the genre, meaning hardcore <i> hip hop </i> is a child of <i> hip hop</i>, indie <i> rock </i> is a child of <i> rock</i>, and so on. 
+<br><br>
+The basic layout of a zoomable sunburst is that once you click on a section, the sunburst opens up to the children of that section, and once you click on a child, the rest of the charts for that genre will appear. <b>If this is the first time opening this article for you, then here are simple instructions to get you familiar with how the sunburst works</b>:
+<br><br>
+<ol class = "content">
+    <li>Click on the "hip hop" section of the sunburst, this will take you to the children of the hip hop genre.</li>
+    <li>Click on the white circle in the middle of the donut, this will return you up a level.</li>
+    <li>Click on the "hip hop" section of the sunburst again.</li>
+    <li>Click on the "hip hop" section once more, this time the section will have a more faded orange color, indicating this section does not have any children.</li>
+    <li>Off you go!</li>
+</ol>
+</p>
 
 <svg id="sunburst" ></svg>
 
+<div id="top_artist">
+    <p class="content-header2" id="genreHeader"></p>
+    <p class="content" id="genreContent"> </p>
+</div>
 
 <div class="containerTables" id="artistData">
     <div class="floatLeft" id="tables">
@@ -13,6 +47,19 @@
     </div>
 </div>
 
+<br><br><br>
+<div id="genre_time">
+<p class="content-header2" id="timeHeader"></p>
+<p class="content" id="timeContent">
+    The following sequential sunburst helps illustrate the breakdown of music listening for a genre 
+    across years, seasons, and days of week. Hover over any section and look above the chart to see
+    the time characteristics selected and the percent of total listens for this genre that were during these
+    time characteristics. The inner most ring allows you to select a certain year, the middle
+    ring allows you to select a certain season, and the outermost ring allows you to select the option of 
+    weekend or weekday.  <b> This may be a little confusing, so instead of
+    just hovering over a section, click any section to display a helpful summary of what that section represents </b>.
+</p>
+</div>
 
 <div class="containerTables" id="artistData">
     <div class="floatLeft">
@@ -24,6 +71,16 @@
     </div>
 </div>
 
+<p class="content" id="timeContent2">
+    The final hierarchical bar chart allows you to investigate a little further the most popular artists
+    and songs listened to during a certain year and season. All rankings are based on total songs listened to.
+    Click on one of the bars the represents all the
+    songs played in a given year, then click on a bar that represents all the songs played during that season 
+    of the selected year. Here, your top artists of that year and season will be displayed. You can again click on an
+    artist to see the most played songs of that artist. To return up a level, click on the top left corner, just to the
+    left of the 0 marker. 
+</p>
+<br><br>
 <svg id="hi_bar"></svg>
 
 
