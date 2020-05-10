@@ -3,7 +3,7 @@ document.getElementById("topArtist").style.display = "none";
 document.getElementById("genreTime").style.display = "none";
 document.getElementById("artistContent").style.display = "none";
 document.getElementById("timeContent2").style.display = "none";
-
+document.getElementById("resetDiv").style.display = "none";
 
 
 // Partition function
@@ -150,18 +150,8 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
 
   function displayGenreData(p) {
 
-    d3.select("#table_l").selectAll("*").remove()
-    d3.select("#table_r").selectAll("*").remove()
-    d3.select("#bar_race").selectAll("*").remove()
-    d3.select("#seq_sunburst").selectAll("*").remove()
-    d3.select("#seq_description").selectAll("*").remove()
-    d3.select("#hi_bar").selectAll("*").remove()
-    d3.select("#artist_hi_bar").selectAll("*").remove()
-
-    document.getElementById("topArtist").style.display = "none";
-    document.getElementById("genreTime").style.display = "none";
-    document.getElementById("artistContent").style.display = "none";
-    document.getElementById("timeContent2").style.display = "none";
+    resetPage();
+    
 
     
     if (p.id.trim() == "Genre" || p.height > 0){
@@ -182,6 +172,7 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
       produceHierarchyBar(artist_song_data, p.id.trim(), "#artist_hi_bar");
     })).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_with_artist_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(artist_time_data){
       produceHierarchyBar(artist_time_data, p.id.trim(), "#hi_bar");
+      produceReset();
     }));
 
   };
@@ -208,7 +199,34 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
     document.getElementById("timeContent2").style.display = "block";
     document.getElementById("artistContent").style.display = "block";
     document.getElementById("timeContent2").style.display = "block";
+  }
 
+  function produceReset(){
+    d3.select("#reset").selectAll("*").remove()
+    var a = document.createElement('a');  
+    var link = document.createTextNode("Return to Sunburst and choose another genre!"); 
+    a.appendChild(link);  
+    a.title = "This is Link";  
+    a.href = "#sunburst";  
+    document.getElementById("reset").appendChild(a);  
+    document.getElementById("resetDiv").style.display = "block"; 
+
+
+  }
+
+  function resetPage(){
+    d3.select("#table_l").selectAll("*").remove()
+    d3.select("#table_r").selectAll("*").remove()
+    d3.select("#bar_race").selectAll("*").remove()
+    d3.select("#seq_sunburst").selectAll("*").remove()
+    d3.select("#seq_description").selectAll("*").remove()
+    d3.select("#hi_bar").selectAll("*").remove()
+    d3.select("#artist_hi_bar").selectAll("*").remove()
+    document.getElementById("topArtist").style.display = "none";
+    document.getElementById("genreTime").style.display = "none";
+    document.getElementById("artistContent").style.display = "none";
+    document.getElementById("timeContent2").style.display = "none";
+    document.getElementById("resetDiv").style.display = "none";
   }
 
   function produceHierarchyBar(data, genre, id){
