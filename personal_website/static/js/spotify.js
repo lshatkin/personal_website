@@ -1,6 +1,10 @@
 
-
-
+document.getElementById("genreHeader").style.display = "none";
+document.getElementById("genreContent").style.display = "none";
+document.getElementById("timeHeader").style.display = "none";
+document.getElementById("timeContent").style.display = "none";
+document.getElementById("timeContent2").style.display = "none";
+document.getElementById("artistContent").style.display = "none";
 
 
 // Partition function
@@ -12,33 +16,23 @@ partition = data => {
 // Data
 d3.csv('/static/articles/spotify_d3/data/genre_hierarchy.csv').then(function(vCsvData) {
   d3.csv('/static/articles/spotify_d3/data/total_listens_artist.csv').then(function(total_listens_artist ) {
-    d3.csv('/static/articles/spotify_d3/data/total_listens_artist_all_genres.csv').then(function(total_listens_artist_all ) {
-      d3.csv('/static/articles/spotify_d3/data/total_listens_track.csv').then(function(total_listens_song) {
-        d3.csv('/static/articles/spotify_d3/data/total_listens_track_all_genres.csv').then(function(total_listens_song_all) {    
-          d3.csv('/static/articles/spotify_d3/data/enriched_song_data.csv').then(function(enriched_song_data) {
-            stratify_data = d3
-                .stratify()
-                .id(d => d.id)
-                .parentId(d => d.parent)(vCsvData)
-                .sum(d => d.value)
-                .sort((a, b) => d3.ascending(a.id, b.id))
+    d3.csv('/static/articles/spotify_d3/data/total_listens_artist_all_genres.csv').then(function(total_listens_artist_all ) {  
+      d3.csv('/static/articles/spotify_d3/data/enriched_song_data.csv').then(function(enriched_song_data) {
+        stratify_data = d3
+            .stratify()
+            .id(d => d.id)
+            .parentId(d => d.parent)(vCsvData)
+            .sum(d => d.value)
+            .sort((a, b) => d3.ascending(a.id, b.id))
 
-            draw(stratify_data, total_listens_artist, total_listens_song, enriched_song_data);
-          });
-        });
+        draw(stratify_data, total_listens_artist, enriched_song_data);
       });
     });
   });
 });
 
 
-function draw(stratify_data, total_listens_artist, total_listens_song, enriched_song_data) {
-
-  document.getElementById("genreHeader").style.display = "none";
-  document.getElementById("genreContent").style.display = "none";
-  document.getElementById("timeHeader").style.display = "none";
-  document.getElementById("timeContent").style.display = "none";
-  document.getElementById("timeContent2").style.display = "none";
+function draw(stratify_data, total_listens_artist, enriched_song_data) {
 
   // Variables for sunburst
   var width = 700;
@@ -163,12 +157,16 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     d3.select("#seq_sunburst").selectAll("*").remove()
     d3.select("#seq_description").selectAll("*").remove()
     d3.select("#hi_bar").selectAll("*").remove()
+    d3.select("#artist_hi_bar").selectAll("*").remove()
 
     document.getElementById("genreHeader").style.display = "none";
     document.getElementById("genreContent").style.display = "none";
     document.getElementById("timeHeader").style.display = "none";
     document.getElementById("timeContent").style.display = "none";
     document.getElementById("timeContent2").style.display = "none";
+    document.getElementById("artistContent").style.display = "none";
+
+    
 
 
     
@@ -176,7 +174,6 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
       return;
     } else {
       artist_data = total_listens_artist.filter(d => d.genres == p.id.trim()).slice(0, 5);
-      song_data = total_listens_song.filter(d => d.genres == p.id.trim()).slice(0, 5);
       total_listens_genre = enriched_song_data.filter(d => d.genres == p.id.trim());
     }
 
@@ -187,8 +184,10 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
       smoothScroll("genreHeader")
     }).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(time_data) {
       produceSeqSunburst(time_data, total_listens_genre, p.id.trim());
+    })).then(d3.json('/static/articles/spotify_d3/data/artist_hierarchy/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(artist_song_data){
+      produceHierarchyBar(artist_song_data, p.id.trim(), "#artist_hi_bar");
     })).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_with_artist_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(artist_time_data){
-      produceHierarchyBar(artist_time_data, p.id.trim());
+      produceHierarchyBar(artist_time_data, p.id.trim(), "#hi_bar");
     }));
 
   };
@@ -203,28 +202,22 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
     }
 
     document.getElementById("genreHeader").textContent = 'Top Artists of Genre ' + end_genre;
-
-    var content = "The following charts display the top artists for this genre, but of all time (on the left) \
+    var content = "The following charts display the top artists for this genre, both of all time (on the left) \
                     and over time (bar chart race on the right). 'Listens' means total songs listened \
                     to by that artist. "
     document.getElementById("genreContent").textContent = content;
-
     document.getElementById("genreHeader").style.display = "block";
     document.getElementById("genreContent").style.display = "block";
 
-    document.getElementById("timeHeader").textContent = "Listening Patterns based on Time for " + end_genre;
-
+    document.getElementById("timeHeader").textContent = "Listening Patterns based on Time";
     document.getElementById("timeHeader").style.display = "block";
     document.getElementById("timeContent").style.display = "block";
     document.getElementById("timeContent2").style.display = "block";
-
-    
-
+    document.getElementById("artistContent").style.display = "block";
 
   }
 
-  function produceHierarchyBar(data, genre){
-    console.log(data)
+  function produceHierarchyBar(data, genre, id){
 
     var margin = ({top: 30, right: 30, bottom: 0, left: 100});
     var width = 700;
@@ -256,9 +249,6 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
 
     var color = d3.scaleOrdinal([true, false], ["steelblue", "#aaa"]);
     var duration = 750;
-    
-    console.log(data)
-    console.log(height)
 
     chart = function(){
       const root = d3.hierarchy(data)
@@ -266,9 +256,8 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
         .sort((a, b) => b.value - a.value)
         .eachAfter(d => d.index = d.parent ? d.parent.index = d.parent.index + 1 || 0 : 0);
 
-      const svg = d3.select("#hi_bar")
+      const svg = d3.select(id)
           .attr("viewBox", [-160, 0, width * 1.5, height]);  
-
 
       x.domain([0, root.value]);
 
@@ -681,7 +670,6 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
       var num_vars = seq.length
       var year = seq[0].data.name
       filtered_total_listens = total_listens.filter(d => d.year == year);
-      console.log(filtered_total_listens);
 
       if (num_vars > 1){
         var season = seq[1].data.name;
@@ -689,10 +677,7 @@ function draw(stratify_data, total_listens_artist, total_listens_song, enriched_
       }
       if (num_vars > 2){
         var weekday = seq[2].data.name
-        console.log(filtered_total_listens)
-        console.log(weekday)
         filtered_total_listens = filtered_total_listens.filter(d => d.weekday == weekday);
-        console.log(filtered_total_listens)
       }
       var total_songs = filtered_total_listens.length;
       var total_listen_artist = rollup(filtered_total_listens, v => d3.sum(v, d => d.count), d => d.artistName)

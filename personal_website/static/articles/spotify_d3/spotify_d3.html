@@ -48,16 +48,32 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
 </div>
 
 <br><br><br>
+
+<p class="content" id="artistContent">
+    The following interactive bar chart allows us to dig a little deeper into the top artists for this genre by
+    showing us the top songs for each artist. Click the bar next to an artist's name to get to the top songs for
+    that artist. To return back to the list of artists, click the top left corner, just to the left of the 0 mark.
+</p>
+<br><br>
+<svg id="artist_hi_bar"></svg>
+
+<br><br><br>
 <div id="genre_time">
 <p class="content-header2" id="timeHeader"></p>
 <p class="content" id="timeContent">
     The following sequential sunburst helps illustrate the breakdown of music listening for a genre 
-    across years, seasons, and days of week. Hover over any section and look above the chart to see
-    the time characteristics selected and the percent of total listens for this genre that were during these
-    time characteristics. The inner most ring allows you to select a certain year, the middle
-    ring allows you to select a certain season, and the outermost ring allows you to select the option of 
-    weekend or weekday.  <b> This may be a little confusing, so instead of
-    just hovering over a section, click any section to display a helpful summary of what that section represents </b>.
+    across years, seasons, and days of week. Follow the following instructions to get you started:
+
+    <br><br>
+    <ol class = "content">
+        <li>In the innermost ring, hover over the dark purple section. Above the chart, you should see a tag above the chart displaying "2017", and a percentage. This percentage represents the percent of total listens, for this genre, that occurred in 2017.</li>
+        <li>Hover over the orange section just above the purple section you just selected. Again, notice the tags above the chart, now displaying "2017" and "winter", along with a percentage. As expected, this percentage shows the percent of total listens, for this genre, that occurred in the winter of 2017.</li>
+        <li>In the outermost ring, hover over the dark grey section. The last tag will now show "weekend", and the percentage will show what you expect.</li>
+        <li>Finally, <b> and this one is important </b>, click any section on this sunburst and an explanation of what
+        that section represents will appear to the right of the chart. This should be helpful for anyone who is still confused. </li>
+        <li>Play around and look at all the different combinations across time. </li>
+    </ol>
+
 </p>
 </div>
 
