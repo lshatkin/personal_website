@@ -13,6 +13,7 @@ As with my <a href = http://www.lloydshatkin.com/articles/spotify> other Spotify
 </p>
 <p class="content-header1"> The Fun Stuff </p>
 <hr>
+
 <p class="content-header2"> Choose your Genre </p>
 <p class="content"> 
 First off, a helpful hint moving forward: zoom out a little on your screen to be able to see the graphics a little more easily, just to 75% or so. 
@@ -32,7 +33,7 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
 
 <svg id="sunburst" ></svg>
 
-<div id="top_artist">
+<div id="topArtist">
     <p class="content-header2" id="genreHeader"></p>
     <p class="content" id="genreContent"> </p>
 </div>
@@ -58,7 +59,7 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
 <svg id="artist_hi_bar"></svg>
 
 <br><br><br>
-<div id="genre_time">
+<div id="genreTime">
 <p class="content-header2" id="timeHeader"></p>
 <p class="content" id="timeContent">
     The following sequential sunburst helps illustrate the breakdown of music listening for a genre 
@@ -66,9 +67,9 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
 
     <br><br>
     <ol class = "content">
-        <li>In the innermost ring, hover over the dark purple section. Above the chart, you should see a tag above the chart displaying "2017", and a percentage. This percentage represents the percent of total listens, for this genre, that occurred in 2017.</li>
-        <li>Hover over the orange section just above the purple section you just selected. Again, notice the tags above the chart, now displaying "2017" and "winter", along with a percentage. As expected, this percentage shows the percent of total listens, for this genre, that occurred in the winter of 2017.</li>
-        <li>In the outermost ring, hover over the dark grey section. The last tag will now show "weekend", and the percentage will show what you expect.</li>
+        <li>In the innermost ring, hover over the dark purple section. Above the chart, you should see a tag above the chart displaying "2017", and a percentage. This percentage represents the percent of total listens, for this genre, that occurred in 2017. Note that each color-coded section in the innermost ring represents a differenct year.</li>
+        <li>Hover over the orange section just above the purple section you just selected. Again, notice the tags above the chart, now displaying "2017" and "winter", along with a percentage. As expected, this percentage shows the percent of total listens, for this genre, that occurred in the winter of 2017. Note that each color-coded section in this ring represents a different season. </li>
+        <li>In the outermost ring, hover over the dark grey section. The last tag will now show "weekend", and the percentage will show what you expect. Note that the other section in this outer ring represents "weekday" listening.</li>
         <li>Finally, <b> and this one is important </b>, click any section on this sunburst and an explanation of what
         that section represents will appear to the right of the chart. This should be helpful for anyone who is still confused. </li>
         <li>Play around and look at all the different combinations across time. </li>
@@ -88,13 +89,9 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
 </div>
 
 <p class="content" id="timeContent2">
-    The final hierarchical bar chart allows you to investigate a little further the most popular artists
-    and songs listened to during a certain year and season. All rankings are based on total songs listened to.
-    Click on one of the bars the represents all the
-    songs played in a given year, then click on a bar that represents all the songs played during that season 
-    of the selected year. Here, your top artists of that year and season will be displayed. You can again click on an
-    artist to see the most played songs of that artist. To return up a level, click on the top left corner, just to the
-    left of the 0 marker. 
+    The final interactive bar chart is similar to the one seen above, but just adds a few more features. In this bar
+    chart, total listening is sectioned off by year and season, allowing you to easily see the top artist for the selected 
+    genre in different sections of time, such as Winter 2019 or Fall 2017. As before with the interactive bar chart, click on a bar to enter into that section, and click on the top left corner next to the 0 mark to go back up a level. 
 </p>
 <br><br>
 <svg id="hi_bar"></svg>

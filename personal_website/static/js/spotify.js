@@ -1,10 +1,9 @@
 
-document.getElementById("genreHeader").style.display = "none";
-document.getElementById("genreContent").style.display = "none";
-document.getElementById("timeHeader").style.display = "none";
-document.getElementById("timeContent").style.display = "none";
-document.getElementById("timeContent2").style.display = "none";
+document.getElementById("topArtist").style.display = "none";
+document.getElementById("genreTime").style.display = "none";
 document.getElementById("artistContent").style.display = "none";
+document.getElementById("timeContent2").style.display = "none";
+
 
 
 // Partition function
@@ -159,15 +158,10 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
     d3.select("#hi_bar").selectAll("*").remove()
     d3.select("#artist_hi_bar").selectAll("*").remove()
 
-    document.getElementById("genreHeader").style.display = "none";
-    document.getElementById("genreContent").style.display = "none";
-    document.getElementById("timeHeader").style.display = "none";
-    document.getElementById("timeContent").style.display = "none";
-    document.getElementById("timeContent2").style.display = "none";
+    document.getElementById("topArtist").style.display = "none";
+    document.getElementById("genreTime").style.display = "none";
     document.getElementById("artistContent").style.display = "none";
-
-    
-
+    document.getElementById("timeContent2").style.display = "none";
 
     
     if (p.id.trim() == "Genre" || p.height > 0){
@@ -206,14 +200,14 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
                     and over time (bar chart race on the right). 'Listens' means total songs listened \
                     to by that artist. "
     document.getElementById("genreContent").textContent = content;
-    document.getElementById("genreHeader").style.display = "block";
-    document.getElementById("genreContent").style.display = "block";
+    document.getElementById("topArtist").style.display = "block";
 
     document.getElementById("timeHeader").textContent = "Listening Patterns based on Time";
-    document.getElementById("timeHeader").style.display = "block";
-    document.getElementById("timeContent").style.display = "block";
+
+    document.getElementById("genreTime").style.display = "block";
     document.getElementById("timeContent2").style.display = "block";
     document.getElementById("artistContent").style.display = "block";
+    document.getElementById("timeContent2").style.display = "block";
 
   }
 
