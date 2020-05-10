@@ -151,8 +151,7 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
   function displayGenreData(p) {
 
     resetPage();
-    
-
+    produceReset();
     
     if (p.id.trim() == "Genre" || p.height > 0){
       return;
@@ -172,7 +171,6 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
       produceHierarchyBar(artist_song_data, p.id.trim(), "#artist_hi_bar");
     })).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_with_artist_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(artist_time_data){
       produceHierarchyBar(artist_time_data, p.id.trim(), "#hi_bar");
-      produceReset();
     }));
 
   };
@@ -202,15 +200,24 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
   }
 
   function produceReset(){
-    d3.select("#reset").selectAll("*").remove()
-    var a = document.createElement('a');  
-    var link = document.createTextNode("Return to Sunburst and choose another genre!"); 
-    a.appendChild(link);  
-    a.title = "This is Link";  
-    a.href = "#sunburst";  
-    document.getElementById("reset").appendChild(a);  
+    d3.select("#reset").selectAll("*").remove();
+    const svg = d3.select("#reset")
+          .attr("viewBox", [0, 0, 700, 100]);  
+
+    svg.append("text")
+      .text("Return to Genre Selection Sunburst")
+      .attr("cursor", "pointer")
+      .attr("x" , 220)
+      .attr("y", 30)
+      .attr("text-decoration", "underline")
+      .attr("stroke", "blue")
+      .on("click", resetClick);
     document.getElementById("resetDiv").style.display = "block"; 
 
+    function resetClick(){
+      smoothScroll("chooseGenre");
+      setTimeout(resetPage, 1000);
+    }
 
   }
 
@@ -625,6 +632,7 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
         .append("g")
         .attr("fill", "none")
         .attr("pointer-events", "all")
+        .attr("cursor", "pointer")
         .on("mouseleave", () => {
           path.attr("fill-opacity", 1);
           label.style("visibility", "hidden");

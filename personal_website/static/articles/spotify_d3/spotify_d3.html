@@ -1,5 +1,5 @@
 
-<p class="content-header1"> Overview - need to change cursor for sequential sunburst, add label for bar charts, one of the folk ones didnt work </p>
+<p class="content-header1"> Overview - add label for bar charts, one of the folk ones didnt work </p>
 <hr>
 <p class="content"> 
 
@@ -14,11 +14,11 @@ As with my <a href = http://www.lloydshatkin.com/articles/spotify> other Spotify
 <p class="content-header1"> The Fun Stuff </p>
 <hr>
 
-<p class="content-header2"> Choose your Genre </p>
+<p class="content-header2" id="chooseGenre"> Choose your Genre </p>
 <p class="content"> 
 First off, a helpful hint moving forward: zoom out a little on your screen to be able to see the graphics a little more easily, just to 75% or so. 
 <br><br>
-D3 provides a great framework for working with interactive hiearachies. I decided to start my article here, with a <b>zoomable sunburst</b> that displays genre hierarchies. The genres displayed are the genres provided by Spotify for the artists I listen to. Artists can be classified as several genres, so don't be surprised to see the same artist across different genres. Further, I created the hierarachy of genres purely based on the name of the genre, meaning hardcore <i> hip hop </i> is a child of <i> hip hop</i>, indie <i> rock </i> is a child of <i> rock</i>, and so on. 
+D3 provides a great framework for working with interactive hiearachies. I decided to start my article here, with a <b>zoomable sunburst</b> that displays genre hierarchies. The genres displayed are the genres provided by Spotify for the artists I listen to. Artists can be classified as several genres, so don't be surprised to see the same artist across different genres. For example, Kendrick Lamar is classified under the genres Rap, Hip Hop, Conscious Hip Hop and West Coast Hip Hop. I decided to leave an artist connected to all their genres because, as Spotify thinks as well, an artist is rarely tied down to one individual genre. Going back to the genre hierarchies, I created the hierarachy purely based on the name of the genre, meaning hardcore <i> hip hop </i> is a child of <i> hip hop</i>, indie <i> rock </i> is a child of <i> rock</i>, and so on. 
 <br><br>
 The basic layout of a zoomable sunburst is that once you click on a section, the sunburst opens up to the children of that section, and once you click on a child, the rest of the charts for that genre will appear. <b>If this is the first time opening this article for you, then here are simple instructions to get you familiar with how the sunburst works</b>:
 <br><br>
@@ -30,6 +30,7 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
     <li>Off you go!</li>
 </ol>
 </p>
+
 
 <svg id="sunburst" ></svg>
 
@@ -68,7 +69,7 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
     <br><br>
     <ol class = "content">
         <li>In the innermost ring, hover over the dark purple section. Above the chart, you should see a tag above the chart displaying "2017", and a percentage. This percentage represents the percent of total listens, for this genre, that occurred in 2017. Note that each color-coded section in the innermost ring represents a different year.</li>
-        <li>Hover over the orange section just above the purple section you just selected. Again, notice the tags above the chart, now displaying "2017" and "winter", along with a percentage. As expected, this percentage shows the percent of total listens, for this genre, that occurred in the winter of 2017. Note that each color-coded section in this ring represents a different season. </li>
+        <li>Hover over the orange section just above the purple section you just selected. The tags above show a new percentage that shows the percentage of total listens, for this genre, that occurred in the winter of 2017. Each color-coded section in this ring represents a different season. </li>
         <li>In the outermost ring, hover over the dark grey section. The last tag will now show "weekend", and the percentage will show what you expect. Note that the other section in this outer ring represents "weekday" listening.</li>
         <li>Finally, <b> and this one is important </b>, click any section on this sunburst and an explanation of what
         that section represents will appear to the right of the chart. This should be helpful for anyone who is still confused. </li>
@@ -100,7 +101,7 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
     <p class="content" id="resetText">
         Hopefully these charts provide an interesting and insightful look into the my music listening habits. Again, I know it would be more fun with your own data, so please reach out to Spotify and I can make one for you! Either way, have fun playing around in this interactive playground by choosing another genre and doing it all again. There is also one more chart at the conclusion of this worth checking out, after you get bored with the genres.
     </p>
-    <p class="content-header3" id="reset"></p>
+    <svg id="reset"></svg>
 </div>
 
 
