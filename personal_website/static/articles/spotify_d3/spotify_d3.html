@@ -16,11 +16,11 @@ As with my <a href = http://www.lloydshatkin.com/articles/spotify> other Spotify
 
 <p class="content-header2" id="chooseGenre"> Choose your Genre </p>
 <p class="content"> 
-First off, a helpful hint moving forward: zoom out a little on your screen to be able to see the graphics a little more easily, just to 75% or so. 
+First off, a helpful hint moving forward: zoom out a little on your screen to be able to see the graphics a little more easily, just to 80% or so. 
 <br><br>
 D3 provides a great framework for working with interactive hiearachies. I decided to start my article here, with a <b>zoomable sunburst</b> that displays genre hierarchies. The genres displayed are the genres provided by Spotify for the artists I listen to. Artists can be classified as several genres, so don't be surprised to see the same artist across different genres. For example, Kendrick Lamar is classified under the genres Rap, Hip Hop, Conscious Hip Hop and West Coast Hip Hop. I decided to leave an artist connected to all their genres because, as Spotify thinks as well, an artist is rarely tied down to one individual genre. Going back to the genre hierarchies, I created the hierarachy purely based on the name of the genre, meaning hardcore <i> hip hop </i> is a child of <i> hip hop</i>, indie <i> rock </i> is a child of <i> rock</i>, and so on. 
 <br><br>
-The basic layout of a zoomable sunburst is that once you click on a section, the sunburst opens up to the children of that section, and once you click on a child, the rest of the charts for that genre will appear. <b>If this is the first time opening this article for you, then here are simple instructions to get you familiar with how the sunburst works</b>:
+The basic layout of a zoomable sunburst is that once you click on a section, the sunburst opens up to the children of that section, and once you click on a child, the rest of the charts for that genre will appear. Additionally, the larger the section on the sunburst, the more artists of that genre I listened to. <b>If this is the first time opening this article for you, then here are simple instructions to get you familiar with how the sunburst works</b>:
 <br><br>
 <ol class = "content">
     <li>Click on the "hip hop" section of the sunburst, this will take you to the children of the hip hop genre.</li>
@@ -69,7 +69,7 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
     <br><br>
     <ol class = "content">
         <li>In the innermost ring, hover over the dark purple section. Above the chart, you should see a tag above the chart displaying "2017", and a percentage. This percentage represents the percent of total listens, for this genre, that occurred in 2017. Note that each color-coded section in the innermost ring represents a different year.</li>
-        <li>Hover over the orange section just above the purple section you just selected. The tags above show a new percentage that shows the percentage of total listens, for this genre, that occurred in the winter of 2017. Each color-coded section in this ring represents a different season. </li>
+        <li>Hover over the orange section above the purple section you just selected. The tags above show a new percentage that shows the percentage of total listens, for this genre, that occurred in the winter of 2017. Each color-coded section in this ring represents a different season. </li>
         <li>In the outermost ring, hover over the dark grey section. The last tag will now show "weekend", and the percentage will show what you expect. Note that the other section in this outer ring represents "weekday" listening.</li>
         <li>Finally, <b> and this one is important </b>, click any section on this sunburst and an explanation of what
         that section represents will appear to the right of the chart. This should be helpful for anyone who is still confused. </li>
@@ -106,16 +106,17 @@ The basic layout of a zoomable sunburst is that once you click on a section, the
 </div>
 
 <div id="conclusion">
-    <p class="content-header" id="timeHeader">Finishing Thoughts</p>
+    <p class="content-header" id="timeHeader">Final Thoughts</p>
     <hr>
     <p class="content" id="conclusionText">
         I would like to end with a fun, visually appealing chart, similar to what I did in the <a href = http://www.lloydshatkin.com/articles/spotify#conclusion> first Spotify article</a>. This <b> chord dependency diagram</b> displays the artist crossover between different genres. A connection between two different genres means that there is at least one artist that is characterized as those two genres. Going back to the introduction paragraph, I said that Kendrick Lamar lies within the Rap and Hip Hop genres, so a link is thus created between those two genres. The width of the connection between two genres, aka the dependency chord, represents the amount of artists that hold those two genres. Looking at hip hop and rap, for example, we see a pretty large dependency chord, which makes sense considering the similarity of these two genres. 
         <br><br>
         I enjoyed seeing the crossover and diversity of certain genres, such as soul. The "soul" genre is connected to 8 other genres. In a way, this can be interpreted as soul music having an influence on a wide variety of genres. But, this graph is less for statsitical inferences and conclusions, and more just for fun. Enjoy, and see what you can find!
     </p>
+    <svg id="dep_graph"></svg>
 </div>
 
-<svg id="dep_graph"></svg>
+
 
 
 
