@@ -4,6 +4,7 @@ document.getElementById("genreTime").style.display = "none";
 document.getElementById("artistContent").style.display = "none";
 document.getElementById("timeContent2").style.display = "none";
 document.getElementById("resetDiv").style.display = "none";
+document.getElementById("conclusion").style.display = "none";
 
 
 // Partition function
@@ -171,6 +172,8 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
       produceHierarchyBar(artist_song_data, p.id.trim(), "#artist_hi_bar");
     })).then(d3.json('/static/articles/spotify_d3/data/time_hierarchy_with_artist_data/' + p.id.replace(/\s+/g, '') + '.json', d3.autoType).then(function(artist_time_data){
       produceHierarchyBar(artist_time_data, p.id.trim(), "#hi_bar");
+    })).then(d3.json('/static/articles/spotify_d3/data/dependency_graph.json', d3.autoType).then(function(dep_data){
+      produceDependency(dep_data);
     }));
 
   };
@@ -197,6 +200,7 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
     document.getElementById("timeContent2").style.display = "block";
     document.getElementById("artistContent").style.display = "block";
     document.getElementById("timeContent2").style.display = "block";
+    document.getElementById("conclusion").style.display = "block";
   }
 
   function produceReset(){
@@ -234,11 +238,12 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
     document.getElementById("artistContent").style.display = "none";
     document.getElementById("timeContent2").style.display = "none";
     document.getElementById("resetDiv").style.display = "none";
+    document.getElementById("conclusion").style.display = "none";
   }
 
   function produceHierarchyBar(data, genre, id){
 
-    var margin = ({top: 30, right: 30, bottom: 0, left: 100});
+    var margin = ({top: 70, right: 30, bottom: 0, left: 100});
     var width = 700;
     var x = d3.scaleLinear().range([margin.left, width - margin.right]);
     var barStep = 40;
@@ -284,16 +289,32 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
           .attr("class", "background")
           .attr("fill", "none")
           .attr("pointer-events", "all")
-          .attr("width", width)
-          .attr("height", height)
+          .attr("width", width / 20)
+          .attr("height", height / 20)
+          .attr("x", 10)
+          .attr("y", 12)
           .attr("cursor", "pointer")
+          .style("fill", "red")
           .on("click", d => up(svg, d));
+
+      svg.append("text")
+          .attr("x", -1)
+          .attr("y", 12)
+          .attr("font-size", "18px")
+          .attr("font-weight", "bold")
+          .text("return");
 
       svg.append("g")
           .call(xAxis);
 
       svg.append("g")
           .call(yAxis);
+
+      svg.append("text")      
+        .attr("transform", `translate(225,${margin.top / 3})`)       
+        .style("text-anchor", "middle")
+        .style("font-size", "24px")
+        .text("Total Songs Listened To");
 
       down(svg, root);
 
@@ -952,6 +973,121 @@ function draw(stratify_data, total_listens_artist, enriched_song_data) {
         .append("td")
         .attr("style", "font-family: 'Lato'")
           .html(d => d.value);
+  }
+
+  function produceDependency(data_in){
+
+    var color = d3.interpolateRainbow;
+    var width = 954;
+    var height = width;
+    var outerRadius = Math.min(width, height) * 0.4;
+    var innerRadius = outerRadius - 124;
+
+    var chord = d3.chord()
+      .padAngle(.04)
+      .sortSubgroups(d3.descending)
+      .sortChords(d3.descending);
+
+    var arc = d3.arc()
+      .innerRadius(innerRadius)
+      .outerRadius(innerRadius + 20);
+
+    var ribbon = d3.ribbon()
+      .radius(innerRadius);
+
+
+    getData = function(imports){
+
+      const indexByName = new Map;
+      const nameByIndex = new Map;
+      const matrix = [];
+      let n = 0;
+
+      // Returns the Flare package name for the given class name.
+      function name(name) {
+        return name.substring(name.lastIndexOf(".")+1);
+      }
+
+      // Compute a unique index for each package name.
+      imports.forEach(d => {
+        if (!indexByName.has(d = name(d.name))) {
+          nameByIndex.set(n, d);
+          indexByName.set(d, n++);
+        }
+      });
+
+      // Construct a square matrix counting package imports.
+      imports.forEach(d => {
+        const source = indexByName.get(name(d.name));
+        let row = matrix[source];
+        if (!row) row = matrix[source] = Array.from({length: n}).fill(0);
+        d.imports.forEach(d => row[indexByName.get(name(d))]++);
+      });
+      
+      for(var i = 0; i < matrix.length; i++) {
+        var row = matrix[i];
+        for(var j = 0; j < row.length; j++) {
+            if (matrix[i][j] != 0){
+              matrix[i][j] = Math.log(matrix[i][j])
+            }
+        }
+      }
+
+      return {
+        matrix,
+        indexByName,
+        nameByIndex
+      };
+    }
+
+    data = getData(data_in);
+
+    chart = function(data){
+
+      const svg = d3.select("#dep_graph")
+          .attr("viewBox", [-477, -400, width, height])
+          .attr("font-size", 30)
+          .attr("font-family", "sans-serif")
+          .style("width", "100%")
+          .style("height", "auto");
+
+      const chords = chord(data.matrix);
+
+      const group = svg.append("g")
+        .selectAll("g")
+        .data(chords.groups)
+        .join("g");
+
+      group.append("path")
+          .attr("fill", d => color(d.index/16))
+          .attr("stroke", d => color(d.index/16))
+          .attr("d", arc);
+
+      group.append("text")
+          .each(d => { d.angle = (d.startAngle + d.endAngle) / 2; })
+          .attr("dy", ".35em")
+          .attr("transform", d => `
+            rotate(${(d.angle * 180 / Math.PI - 90)})
+            translate(${innerRadius + 26})
+            ${d.angle > Math.PI ? "rotate(180)" : ""}
+          `)
+          .attr("text-anchor", d => d.angle > Math.PI ? "end" : null)
+          .text(d => data.nameByIndex.get(d.index));
+
+      svg.append("g")
+          .attr("fill-opacity", 0.67)
+        .selectAll("path")
+        .data(chords)
+        .join("path")
+          .attr("stroke", d => d3.rgb(color(d.source.index/16)).darker())
+          .attr("fill", d => color(d.source.index/16))
+          .attr("d", ribbon);
+
+      return svg.node();
+    }
+
+    chart(data);
+
   }
 
   function smoothScroll(elementId) {

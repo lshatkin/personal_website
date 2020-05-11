@@ -199,4 +199,5 @@ table.blueTable tr td:first-child::before {
 
 .seq_description {
   font-size: 34px;
+  fill: red;
 }
