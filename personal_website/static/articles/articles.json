@@ -23,6 +23,7 @@
         "D3",
         "Data Viz"
       ],
+      "github" : "https://github.com/lshatkin/What_I_Listen",
       "photos": [
         "/static/articles/spotify_d3/dep_graph.png"
       ]
