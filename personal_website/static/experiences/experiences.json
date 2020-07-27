@@ -1,7 +1,7 @@
 {
   "experiences": [
     {
-      "link": "https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567",
+      "link": "https://www.unabridgedbookstore.com/book/9780465026562",
       "weight": 3,
       "tags": [
         "Computer Science",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/Superintelligence-Dangers-Strategies-Nick-Bostrom/dp/1501227742",
+      "link": "https://www.unabridgedbookstore.com/book/9780198739838",
       "weight": 6,
       "tags": [
         "A.I.",
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/Age-Surveillance-Capitalism-Future-Frontier/dp/1610395697",
+      "link": "https://www.unabridgedbookstore.com/book/9781541758001",
       "weight": 9,
       "tags": [
         "Big Tech",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/Player-Piano-Novel-Kurt-Vonnegut/dp/0385333781",
+      "link": "https://www.unabridgedbookstore.com/book/9780385333788",
       "weight": 10,
       "tags": [
         "A.I.",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555",
+      "link": "https://www.unabridgedbookstore.com/book/9780374533557",
       "weight": 8,
       "tags": [
         "A.I.",
@@ -56,8 +56,8 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/American-Summer-Love-Death-Chicago/dp/0385538804",
-      "weight": 5,
+      "link": "https://www.unabridgedbookstore.com/book/9780804170918",
+      "weight": 7,
       "tags": [
         "Sociology",
         "Business"
@@ -67,8 +67,8 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/Confederacy-Dunces-John-Kennedy-Toole/dp/0802130208",
-      "weight": 7,
+      "link": "https://www.unabridgedbookstore.com/book/9780802130204",
+      "weight": 6,
       "tags": [
         "Fiction"
       ],
@@ -77,7 +77,7 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/Evicted-Poverty-Profit-American-City/dp/0553447459",
+      "link": "https://www.unabridgedbookstore.com/book/9780553447453",
       "weight": 9,
       "tags": [
         "Fiction"
@@ -87,7 +87,7 @@
       ]
     },
     {
-      "link": "https://www.amazon.com/Dreaming-Beatles-Story-Whole-World/dp/0062207652",
+      "link": "https://www.unabridgedbookstore.com/book/9780062207661",
       "weight": 4,
       "tags": [
         "Music"
@@ -97,7 +97,7 @@
       ]
     },
         {
-      "link": "https://www.amazon.com/Black-Swan-Improbable-Robustness-Fragility/dp/081297381X",
+      "link": "https://www.unabridgedbookstore.com/book/9780812973815",
       "weight": 2,
       "tags": [
         "Music"
@@ -107,7 +107,7 @@
       ]
     },
         {
-      "link": "https://www.amazon.com/Good-Lord-Bird-James-McBride/dp/1594632782",
+      "link": "https://www.unabridgedbookstore.com/book/9781594632785",
       "weight": 5,
       "tags": [
         "Music"
@@ -117,13 +117,13 @@
       ]
     },
         {
-      "link": "https://www.amazon.com/Killer-Angels-Classic-Novel-Trilogy/dp/0345348109",
-      "weight": 2,
+      "link": "https://www.unabridgedbookstore.com/book/9780062235077",
+      "weight": 7,
       "tags": [
         "Music"
       ],
       "photos": [
-        "/static/experiences/images/killer.jpg"
+        "/static/experiences/images/high_risers.jpg"
       ]
     }
 
