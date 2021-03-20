@@ -20,7 +20,7 @@ setup(
         'Flask-WTF==0.14.2',
         'gunicorn==19.7.1',
         'itsdangerous==0.24',
-        'Jinja2==2.10.1',
+        'Jinja2==2.11.3',
         'MarkupSafe==1.0',
         'SQLAlchemy==1.3.0',
         'Werkzeug==0.16.0',
